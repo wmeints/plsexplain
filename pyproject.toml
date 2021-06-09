@@ -7,8 +7,12 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+click = "^8.0.1"
 
 [tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+plsexplain = "plsexplain.cli:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
