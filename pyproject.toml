@@ -8,8 +8,17 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8"
 click = "^8.0.1"
+dalex = "^1.2.0"
+tqdm = "^4.61.1"
+progressbar2 = "^3.53.1"
+uvicorn = {extras = ["standard"], version = "^0.14.0"}
+fastapi = "^0.65.2"
+aiofiles = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
+Sphinx = "^4.0.2"
+pytest = "^6.2.4"
+black = {version = "^21.6b0", allow-prereleases = true}
 
 [tool.poetry.scripts]
 plsexplain = "plsexplain.cli:main"
@@ -17,3 +26,6 @@ plsexplain = "plsexplain.cli:main"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
