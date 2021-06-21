@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Create an explainable AI dashboard for your machine learning model."
 authors = ["Willem Meints <willem.meints@gmail.com>"]
 license = "MIT"
+include = [
+    "client/build/**/*"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"

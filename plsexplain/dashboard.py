@@ -3,7 +3,7 @@ import joblib
 import dalex as dx
 import progressbar
 import uvicorn
-from plsexplain.server import make_server
+from .server import make_server
 
 
 class Dashboard:
