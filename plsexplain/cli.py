@@ -18,15 +18,9 @@ def open_browser(url):
 @click.command(options_metavar="<options>")
 @click.argument("model", metavar="<model>", type=click.Path("r", file_okay=True, dir_okay=False), required=True)
 @click.argument("dataset", metavar="<dataset>", type=click.Path("r", file_okay=True, dir_okay=False), required=True)
-@click.option(
-    "--type",
-    required=True,
-    type=click.Choice(["classification", "regression"], case_sensitive=True),
-    help='The type of model you want explained. This can be "regression" or "classification"',
-)
 @click.option("--host", type=str, default="127.0.0.1", help="The host the dashboard should be hosted on (default 127.0.0.1)")
 @click.option("--port", type=int, default=8000, help="The HTTP port to serve the dashboard on (default 8000)")
-def main(model, dataset, type, host, port):
+def main(model, dataset, host, port):
     """plsexplain <model> <dataset>
 
     Generates an explainable AI dashboard for your machine learning model stored in <model> using samples
@@ -43,7 +37,7 @@ def main(model, dataset, type, host, port):
     the number of samples in the dataset below 500.
     """
 
-    dashboard = Dashboard(model, dataset, type)
+    dashboard = Dashboard(model, dataset)
     dashboard.prepare()
 
     open_browser(f"http://127.0.0.1:{port}")

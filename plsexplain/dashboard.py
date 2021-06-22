@@ -22,11 +22,7 @@ class Dashboard:
         The type of model to explain. Should be 'classification' or 'regression'.
     """
 
-    def __init__(self, model_file, dataset_file, type):
-        if type not in ["classification", "regression"]:
-            raise ValueError("Please provide a type of model to explain: 'classification' or 'regression'")
-
-        self.type = type
+    def __init__(self, model_file, dataset_file):
         self.model_file = model_file
         self.dataset_file = dataset_file
 
@@ -46,7 +42,7 @@ class Dashboard:
 
         with progressbar.ProgressBar(max_value=4, redirect_stdout=True) as progress:
             print("Initializing explainer")
-            self.explainer = dx.Explainer(self.model, self.data["x"], self.data["y"], model_type=self.type, verbose=False)
+            self.explainer = dx.Explainer(self.model, self.data["x"], self.data["y"], verbose=False)
             progress.update(1)
 
             print("Calculating model performance")
