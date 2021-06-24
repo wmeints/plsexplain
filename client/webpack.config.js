@@ -56,7 +56,10 @@ module.exports = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
-        port: 3000
+        port: 3000,
+        proxy: {
+            '/api': 'http://localhost:8000'
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -68,7 +71,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'public/images', to: 'dist/images' }
+                { from: 'public/images', to: 'images' }
             ]
         })
     ]
