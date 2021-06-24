@@ -6,11 +6,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-      index: {
-          import: path.resolve(__dirname, 'src/index.tsx'),
-          dependOn: 'shared'
-      },
-      shared: 'react'
+        index: {
+            import: path.resolve(__dirname, 'src/index.tsx'),
+            dependOn: 'shared'
+        },
+        shared: 'react'
     },
     output: {
         filename: 'app.[name].[chunkhash].js',
@@ -32,13 +32,6 @@ module.exports = {
                 test: /tsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                options: {
-                    presets: [
-                        '@babel/preset-react',
-                        '@babel/preset-env',
-                        '@babel/preset-typescript'
-                    ],
-                }
             },
             {
                 test: /scss$/,
