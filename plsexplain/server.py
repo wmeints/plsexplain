@@ -74,7 +74,7 @@ def get_client_app(sub_path):
     HTMLResponse or FileResponse
         The response from the server.
     """
-    client_folder = join(dirname(dirname(__file__)), "client", "build")
+    client_folder = join(dirname(dirname(__file__)), "client", "dist")
     root_file = join(client_folder, "index.html")
 
     asset_path = join(client_folder, sub_path)
@@ -102,12 +102,12 @@ def make_server(dashboard):
     """
 
     app = FastAPI()
-    asset_folder = join(abspath(dirname(dirname(__file__))), "client/build/static")
+    asset_folder = join(abspath(dirname(dirname(__file__))), "client/dist/images")
 
     app.add_api_route("/api/model/metadata", get_model_metadata(dashboard), methods=["get"])
     app.add_api_route("/api/model/performance", get_model_performance(dashboard), methods=["get"])
 
-    app.mount("/static", StaticFiles(directory=asset_folder), name="static")
+    app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
 
     return app
