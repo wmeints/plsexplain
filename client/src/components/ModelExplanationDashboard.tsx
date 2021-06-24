@@ -1,9 +1,7 @@
 import React from 'react';
 
-const ModelExplanationDashboard = () => {
-    return (
-        <strong>Model explanation</strong>
-    );
-};
+const ModelExplanationDashboard = () => (
+  <strong>Model explanation</strong>
+);
 
-export default ModelExplanationDashboard; 
+export default ModelExplanationDashboard;

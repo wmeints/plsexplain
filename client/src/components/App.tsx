@@ -4,10 +4,10 @@ import DashboardContent from './DashboardContent';
 import Navigation from './Navigation';
 
 const App = () => (
-    <div className="container">
-        <Navigation section="model"/>
-        <DashboardContent section="model"/>
-    </div>
+  <div className="container">
+    <Navigation section="model" />
+    <DashboardContent section="model" />
+  </div>
 );
 
 export default App;

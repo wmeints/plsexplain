@@ -5,15 +5,16 @@ import PredictionExplanationDashboard from './PredictionExplanationDashboard';
 type DashboardContentSection = 'model' | 'prediction';
 
 interface DashboardContentProps {
-    section: DashboardContentSection
+  section: DashboardContentSection
 }
 
 const DashboardContent = (props: DashboardContentProps) => {
-    if(props.section === 'model') {
-        return <ModelExplanationDashboard/>;
-    } else {
-        return <PredictionExplanationDashboard/>;
-    }
+  const { section } = props;
+
+  if (section === 'model') {
+    return <ModelExplanationDashboard />;
+  }
+  return <PredictionExplanationDashboard />;
 };
 
 export default DashboardContent;
