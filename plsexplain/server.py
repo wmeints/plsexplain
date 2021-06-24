@@ -28,7 +28,7 @@ def get_model_performance(dashboard):
             accuracy = dashboard.performance.result.loc[model_index, "accuracy"]
             auc = dashboard.performance.result.loc[model_index, "auc"]
 
-            return {"precision": precision, "recall": recall, "accuracy": accuracy, "f1_score": f1_score, "auc": auc}
+            return {"precision": precision, "recall": recall, "accuracy": accuracy, "f1": f1_score, "auc": auc}
         elif dashboard.performance.model_type == "regression":
             mse = dashboard.performance.result.loc[model_index, "mse"]
             rmse = dashboard.performance.result.loc[model_index, "rmse"]
@@ -56,7 +56,7 @@ def get_model_metadata(dashboard):
     """
 
     def get_model_metadata_internal():
-        return {"type": dashboard.performance.model_type, "model_class": str(dashboard.explainer.model_class)}
+        return {"type": dashboard.performance.model_type, "class": str(dashboard.explainer.model_class)}
 
     return get_model_metadata_internal
 
