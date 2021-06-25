@@ -2,11 +2,11 @@ import React from 'react';
 import { AppState } from '../store';
 import './App.scss';
 import DashboardContent from './DashboardContent';
-import Navigation from './Navigation';
+import NavigationContainer from '../containers/NavigationContainer';
 
 const App = () => (
   <div className="container">
-    <Navigation section="model" />
+    <NavigationContainer/>
     <DashboardContent section="model" />
   </div>
 );
