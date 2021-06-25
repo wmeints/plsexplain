@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppState } from '../store';
 import './App.scss';
 import DashboardContent from './DashboardContent';
 import Navigation from './Navigation';

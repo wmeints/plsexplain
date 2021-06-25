@@ -1,6 +1,6 @@
 import React from 'react';
 
-type NavigationSection = 'model' | 'prediction';
+export type NavigationSection = 'model' | 'prediction';
 
 interface NavigationProps {
   section: NavigationSection
