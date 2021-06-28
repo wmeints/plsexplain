@@ -1,0 +1,28 @@
+on: [push]
+
+name: continuous-integration
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - uses: actions/setup-python@v1
+        with: 
+          python-version: "3.8"
+      - uses: Gr1N/setup-poetry@v4
+      - run: npm install
+        working-directory: client
+        name: Install frontend dependencies
+      - run: poetry install
+        name: Install server dependencies
+      - run: npm run build
+        name: Run unit-tests for frontend
+        working-directory: client
+      - run: poetry run pytest
+        name: Run unit-tests for server
+      - run: poetry package
+        name: Package application
+

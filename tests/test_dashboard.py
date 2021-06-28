@@ -37,7 +37,7 @@ def missing_data_file():
 
 
 def test_create_dashboard(model_file, dataset_file):
-    instance = Dashboard(model_file, dataset_file, "classification")
+    instance = Dashboard(model_file, dataset_file)
 
     assert not instance.data is None
     assert not instance.model is None
@@ -45,14 +45,9 @@ def test_create_dashboard(model_file, dataset_file):
 
 def test_create_dashboard_with_missing_dataset(model_file, missing_data_file):
     with pytest.raises(FileNotFoundError):
-        Dashboard(model_file, missing_data_file, "classification")
+        Dashboard(model_file, missing_data_file)
 
 
 def test_create_dashboard_with_missing_model(missing_model_file, dataset_file):
     with pytest.raises(FileNotFoundError):
-        Dashboard(missing_model_file, dataset_file, "classification")
-
-
-def test_create_dashboard_with_invalid_type(model_file, dataset_file):
-    with pytest.raises(ValueError):
-        Dashboard(model_file, dataset_file, "something_something")
+        Dashboard(missing_model_file, dataset_file)

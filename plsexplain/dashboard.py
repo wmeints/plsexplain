@@ -18,8 +18,6 @@ class Dashboard:
         The dataset should contain a column 'output' that contains the expected output for the sample.
         Also, make sure to use a comma as the separator in your dataset. We recommend using no more than
         500 samples in the dataset for reasonable performance.
-    type : str
-        The type of model to explain. Should be 'classification' or 'regression'.
     """
 
     def __init__(self, model_file, dataset_file):
