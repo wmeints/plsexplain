@@ -1,72 +1,69 @@
 const path = require('path');
+const webpack = require('webpack');
+const MiniCssExtractPlugin  = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackCopyPlugin = require('copy-webpack-plugin');
 
-module.exports = {
-    mode: 'development',
-    entry: {
-        index: {
-            import: path.resolve(__dirname, 'src/index.tsx'),
-            dependOn: 'shared'
-        },
-        shared: 'react'
-    },
+module.exports = (env, argv) => {
+  const isDevelopment = argv.mode === 'development';
+
+  const config = {
+    mode: isDevelopment ? 'development' : 'production',
+    entry: [
+      path.resolve(__dirname, 'src/index.tsx'),
+      path.resolve(__dirname, 'src/index.scss')
+    ],
     output: {
-        filename: 'app.[name].[chunkhash].js',
-        path: path.resolve(__dirname, 'dist'),
-        clean: true
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'bundle.[contenthash].js',
+      clean: true
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.css']
-    },
-    optimization: {
-        runtimeChunk: 'single',
-        splitChunks: {
-            chunks: 'all'
-        }
-    },
-    module: {
-        rules: [
-            {
-                test: /tsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-            },
-            {
-                test: /scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            implementation: require('node-sass')
-                        }
-                    }
-                ]
-            }
-        ]
+      extensions: ['.tsx', '.ts', '.jsx', '.js', '.scss']
     },
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
-        port: 3000,
-        proxy: {
-            '/api': 'http://localhost:8000'
+      contentBase: path.resolve(__dirname, 'dist'),
+      compress: true,
+      port: 3000
+    },
+    devtool: isDevelopment ? 'eval-source-map': 'none',
+    module: {
+      rules: [
+        { 
+          test: /.scss$/,
+          use: [
+            isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                implementation: require('node-sass')
+              }
+            }
+          ]
+        },
+        {
+          test: /.tsx?$/,
+          use: 'babel-loader'
         }
+      ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public/index.html'),
-            compress: true
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'app.[name].[chunkhash].css'
-        }),
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: 'public/images', to: 'images' }
-            ]
-        })
+      new HtmlWebpackPlugin({
+        template: 'public/index.html',
+        publicPath: '/'
+      }),
+      new MiniCssExtractPlugin({
+        filename: 'bundle.[contenthash].css'
+      }),
+      new WebpackCopyPlugin({
+        patterns: [
+          { from: 'public/images', to: 'images' }
+        ]
+      }),
+      new webpack.HotModuleReplacementPlugin()
     ]
-}
+  };
+
+  return config;
+};
