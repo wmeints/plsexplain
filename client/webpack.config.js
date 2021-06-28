@@ -23,7 +23,6 @@ module.exports = (env, argv) => {
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
     devServer: {
-      contentBase: path.resolve(__dirname, 'dist'),
       compress: true,
       port: 3000,
     },
