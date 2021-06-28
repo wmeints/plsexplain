@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
       compress: true,
       port: 3000,
     },
-    devtool: isDevelopment ? 'eval-source-map' : 'none',
+    devtool: isDevelopment ? 'eval-source-map' : false,
     module: {
       rules: [
         {
