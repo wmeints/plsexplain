@@ -22,7 +22,9 @@ jobs:
         name: Install frontend dependencies
       - run: poetry install
         name: Install server dependencies
-
+      - run: poetry run pip install scikit-learn scipy pandas
+        name: Install test dependencies 
+        
       - run: npm run lint
         name: Check sources for frontend
         working-directory: client
