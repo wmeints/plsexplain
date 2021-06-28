@@ -7,7 +7,7 @@ from time import sleep
 
 def open_browser(url):
     """Opens the browser after a short delay to give the webserver time to boot."""
-    
+
     def open_internal():
         sleep(0.5)
         webbrowser.open(url)
@@ -18,7 +18,9 @@ def open_browser(url):
 @click.command(options_metavar="<options>")
 @click.argument("model", metavar="<model>", type=click.Path("r", file_okay=True, dir_okay=False), required=True)
 @click.argument("dataset", metavar="<dataset>", type=click.Path("r", file_okay=True, dir_okay=False), required=True)
-@click.option("--host", type=str, default="127.0.0.1", help="The host the dashboard should be hosted on (default 127.0.0.1)")
+@click.option(
+    "--host", type=str, default="127.0.0.1", help="The host the dashboard should be hosted on (default 127.0.0.1)"
+)
 @click.option("--port", type=int, default=8000, help="The HTTP port to serve the dashboard on (default 8000)")
 def main(model, dataset, host, port):
     """plsexplain <model> <dataset>

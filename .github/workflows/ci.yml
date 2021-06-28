@@ -18,9 +18,19 @@ jobs:
         name: Install frontend dependencies
       - run: poetry install
         name: Install server dependencies
-      - run: npm run build
+
+      - run: npm run lint
+        name: Check sources for frontend
+        working-directory: client
+      - run: npm test
         name: Run unit-tests for frontend
         working-directory: client
+      - run: npm run build
+        name: Build frontend assets
+        working-directory: client
+
+      - run: poetry run flake8 plsexplain
+        name: Check sources for server
       - run: poetry run pytest
         name: Run unit-tests for server
       - run: poetry package

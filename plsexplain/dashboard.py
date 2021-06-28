@@ -36,7 +36,7 @@ class Dashboard:
         2. It calculates performance figures based on the provide dataset.
         3. It calculates feature importance for the model.
         4. It calculates the ALE charts for all features.
-        """ 
+        """
 
         with progressbar.ProgressBar(max_value=4, redirect_stdout=True) as progress:
             print("Initializing explainer")
@@ -52,12 +52,12 @@ class Dashboard:
             progress.update(3)
 
             print("Calculating feature profiles")
-            self.model_profile = self.explainer.model_profile(type='accumulated', verbose=False)
+            self.model_profile = self.explainer.model_profile(type="accumulated", verbose=False)
             progress.update(4)
 
     def serve(self, host, port):
         """Serves the dashboard on a HTTP port so it can be viewed by the user.
-        
+
         Parameters
         ----------
         host : str
@@ -65,7 +65,7 @@ class Dashboard:
         port : int
             The port the server should listen on.
         """
-        
+
         app = make_server(self)
         uvicorn.run(app, host=host, port=port)
 

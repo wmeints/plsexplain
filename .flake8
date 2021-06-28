@@ -1,0 +1,7 @@
+[flake8]
+exclude =
+    .git,
+    dist,
+    docs/source/conf.py,
+    build
+max-line-length=120

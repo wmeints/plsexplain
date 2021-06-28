@@ -23,6 +23,7 @@ joblib = "^1.0.1"
 Sphinx = "^4.0.2"
 pytest = "^6.2.4"
 black = {version = "^21.6b0", allow-prereleases = true}
+flake8 = "^3.9.2"
 
 [tool.poetry.scripts]
 plsexplain = "plsexplain.cli:main"
