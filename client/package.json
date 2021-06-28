@@ -8,7 +8,8 @@
     "updateSnapshots": "jest --updateSnapshot",
     "build": "webpack --mode production",
     "start": "webpack serve --open --mode development",
-    "lint": "eslint **/*.{ts,tsx}"
+    "lint": "eslint **/*.{ts,tsx}",
+    "stryker": "stryker run"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,8 @@
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
+    "@stryker-mutator/core": "^5.1.1",
+    "@stryker-mutator/jest-runner": "^5.1.1",
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
@@ -41,6 +44,7 @@
     "mini-css-extract-plugin": "^1.6.1",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.1.0",
+    "stryker-cli": "^1.0.2",
     "style-loader": "^3.0.0",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4",
