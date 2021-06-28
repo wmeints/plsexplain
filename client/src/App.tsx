@@ -1,5 +1,5 @@
 import React from 'react';
 
-const App = () => (<h1>Hello world</h1>);
+const App = (): React.ReactElement => (<h1>Hello world</h1>);
 
 export default App;

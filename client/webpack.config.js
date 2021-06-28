@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin  = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackCopyPlugin = require('copy-webpack-plugin');
+const sass = require('node-sass');
 
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
@@ -11,25 +12,25 @@ module.exports = (env, argv) => {
     mode: isDevelopment ? 'development' : 'production',
     entry: [
       path.resolve(__dirname, 'src/index.tsx'),
-      path.resolve(__dirname, 'src/index.scss')
+      path.resolve(__dirname, 'src/index.scss'),
     ],
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.[contenthash].js',
-      clean: true
+      clean: true,
     },
     resolve: {
-      extensions: ['.tsx', '.ts', '.jsx', '.js', '.scss']
+      extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
     devServer: {
       contentBase: path.resolve(__dirname, 'dist'),
       compress: true,
-      port: 3000
+      port: 3000,
     },
-    devtool: isDevelopment ? 'eval-source-map': 'none',
+    devtool: isDevelopment ? 'eval-source-map' : 'none',
     module: {
       rules: [
-        { 
+        {
           test: /.scss$/,
           use: [
             isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -37,32 +38,32 @@ module.exports = (env, argv) => {
             {
               loader: 'sass-loader',
               options: {
-                implementation: require('node-sass')
-              }
-            }
-          ]
+                implementation: sass,
+              },
+            },
+          ],
         },
         {
           test: /.tsx?$/,
-          use: 'babel-loader'
-        }
-      ]
+          use: 'babel-loader',
+        },
+      ],
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: 'public/index.html',
-        publicPath: '/'
+        publicPath: '/',
       }),
       new MiniCssExtractPlugin({
-        filename: 'bundle.[contenthash].css'
+        filename: 'bundle.[contenthash].css',
       }),
       new WebpackCopyPlugin({
         patterns: [
-          { from: 'public/images', to: 'images' }
-        ]
+          { from: 'public/images', to: 'images' },
+        ],
       }),
-      new webpack.HotModuleReplacementPlugin()
-    ]
+      new webpack.HotModuleReplacementPlugin(),
+    ],
   };
 
   return config;
