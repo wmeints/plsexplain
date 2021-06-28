@@ -6,13 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        name: Checkout sources
       - uses: actions/setup-node@v2
+        name: Setup node 14
         with:
           node-version: '14'
       - uses: actions/setup-python@v1
+        name: Setup python 3.8
         with: 
           python-version: "3.8"
       - uses: Gr1N/setup-poetry@v4
+        name: Setup poetry tooling
       - run: npm install
         working-directory: client
         name: Install frontend dependencies
