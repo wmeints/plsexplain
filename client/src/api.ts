@@ -16,6 +16,7 @@ export interface RegressionPerformanceResponse {
   type: string
   mse: number
   mae: number
+  mad: number
   rmse: number
   r2: number
 }

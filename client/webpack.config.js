@@ -25,6 +25,9 @@ module.exports = (env, argv) => {
     devServer: {
       compress: true,
       port: 3000,
+      proxy: {
+        '/api': 'http://localhost:8000',
+      },
     },
     devtool: isDevelopment ? 'eval-source-map' : false,
     module: {

@@ -104,8 +104,8 @@ def make_server(dashboard):
     app = FastAPI()
     asset_folder = join(abspath(dirname(dirname(__file__))), "client/dist/images")
 
-    app.add_api_route("/api/model/metadata", get_model_metadata(dashboard), methods=["get"])
-    app.add_api_route("/api/model/performance", get_model_performance(dashboard), methods=["get"])
+    app.add_api_route("/api/metadata", get_model_metadata(dashboard), methods=["get"])
+    app.add_api_route("/api/performance", get_model_performance(dashboard), methods=["get"])
 
     app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
