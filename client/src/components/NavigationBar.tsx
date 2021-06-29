@@ -5,7 +5,7 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 const NavigationBar = (): ReactElement => (
   <Navbar bg="light" expand="lg">
     <Container>
-      <Navbar.Brand href="/">Observatory</Navbar.Brand>
+      <Navbar.Brand href="/">plsexplain</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-content" />
       <Navbar.Collapse id="navbar-content">
         <Nav className="mr-auto">
