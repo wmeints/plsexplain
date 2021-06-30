@@ -48,7 +48,7 @@ class Dashboard:
             progress.update(2)
 
             print("Calculating feature importance")
-            self.feature_importance = self.explainer.model_parts(verbose=False)
+            self.feature_importance = self.explainer.model_parts(verbose=False).plot(show=False)
             progress.update(3)
 
             print("Calculating feature profiles")

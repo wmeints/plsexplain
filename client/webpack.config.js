@@ -21,6 +21,10 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
+      fallback: {
+        'stream': require.resolve('stream-browserify'),
+        'assert': require.resolve('assert')
+      }
     },
     devServer: {
       compress: true,
@@ -32,6 +36,10 @@ module.exports = (env, argv) => {
     devtool: isDevelopment ? 'eval-source-map' : false,
     module: {
       rules: [
+        {
+          test: /.js$/,
+          use: 'ify-loader',
+        },
         {
           test: /.scss$/,
           use: [

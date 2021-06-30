@@ -1,7 +1,7 @@
 from os.path import dirname, abspath, join, isfile
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import HTMLResponse, FileResponse, Response
 
 
 def get_model_performance(dashboard):
@@ -61,6 +61,43 @@ def get_model_metadata(dashboard):
     return get_model_metadata_internal
 
 
+def get_feature_importance(dashboard):
+    """Retrieves the feature importance data for the model.
+    
+    Parameters
+    ----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the feature importance
+    """
+    def get_feature_importance_internal():
+        return dashboard.feature_importance.to_dict()
+    
+    return get_feature_importance_internal
+
+
+def get_feature_profile(dashboard):
+    """Retrieves the feature profile for a feature
+    
+    Parameters
+    ----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the feature importance
+    """
+    def get_feature_profile_internal(name):
+        graph_data = dashboard.model_profile.plot(variables=[name], show=False).to_json()
+        return Response(content=graph_data, media_type='application/json')
+
+    return get_feature_profile_internal
+
+
 def get_client_app(sub_path):
     """Retrieves content for the client app as long as it's not coming from the static folder.
 
@@ -106,7 +143,8 @@ def make_server(dashboard):
 
     app.add_api_route("/api/metadata", get_model_metadata(dashboard), methods=["get"])
     app.add_api_route("/api/performance", get_model_performance(dashboard), methods=["get"])
-
+    app.add_api_route("/api/model/features", get_feature_importance(dashboard), methods=["get"])
+    app.add_api_route("/api/model/features/{name:str}", get_feature_profile(dashboard), methods=["get"])
     app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
 

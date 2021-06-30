@@ -3,7 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 
 const NavigationBar = (): ReactElement => (
-  <Navbar bg="light" expand="lg">
+  <Navbar bg="light" expand="lg" fixed="top" className="shadow">
     <Container>
       <Navbar.Brand href="/">plsexplain</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-content" />

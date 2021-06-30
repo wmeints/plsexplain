@@ -25,6 +25,16 @@ export type PerformanceResponse =
   | ClassificationPerformanceResponse
   | RegressionPerformanceResponse;
 
+export interface FeatureImportanceResponse {
+  data: any
+  layout: any
+}
+
+export interface FeatureProfileResponse {
+  data: any
+  layout: any
+}
+
 export async function fetchMetadata(): Promise<MetadataResponse> {
   const response = await fetch('/api/metadata');
   const data = await response.json();
@@ -34,6 +44,20 @@ export async function fetchMetadata(): Promise<MetadataResponse> {
 
 export async function fetchModelPerformance() : Promise<PerformanceResponse> {
   const response = await fetch('/api/performance');
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchFeatureImportance(): Promise<FeatureImportanceResponse> {
+  const response = await fetch('/api/model/features');
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchFeatureProfile(name: string): Promise<FeatureProfileResponse> {
+  const response = await fetch(`/api/model/features/${name}`);
   const data = await response.json();
 
   return data;
