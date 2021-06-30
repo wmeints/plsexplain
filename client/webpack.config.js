@@ -21,10 +21,6 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
-      fallback: {
-        'stream': require.resolve('stream-browserify'),
-        'assert': require.resolve('assert')
-      }
     },
     devServer: {
       compress: true,
