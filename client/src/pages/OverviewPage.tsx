@@ -1,16 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../redux/store';
-import { ClassificationPerformanceState } from '../redux/metadata';
+import { ClassificationPerformanceState, RegressionPerformanceState } from '../redux/metadata';
 import ClassificationPerformance from '../components/ClassificationPerformance';
 import * as actions from '../redux/actions';
 import ModelType from '../components/ModelType';
 import LoadingIndicator from '../components/LoadingIndicator';
+import RegressionPerformance from '../components/RegressionPerformance';
 
 const OverviewPage = (): React.ReactElement => {
-  const metadataRef = useRef(0);
-  const performanceRef = useRef(0);
-
   const {
     modelType,
     performance,
@@ -22,11 +20,11 @@ const OverviewPage = (): React.ReactElement => {
 
   useEffect(() => {
     dispatch(actions.fetchModelPerformance());
-  }, [performanceRef]);
+  }, []);
 
   useEffect(() => {
     dispatch(actions.fetchMetadata());
-  }, [metadataRef]);
+  }, []);
 
   return (
     <div className="container">
@@ -45,6 +43,7 @@ const OverviewPage = (): React.ReactElement => {
         <div className="col">
           {performanceDataLoading && <LoadingIndicator text="Loading model performance data..." />}
           {modelType === 'classification' && !performanceDataLoading && <ClassificationPerformance data={performance as ClassificationPerformanceState} />}
+          {modelType === 'regression' && !performanceDataLoading && <RegressionPerformance data={performance as RegressionPerformanceState} />}
         </div>
       </div>
     </div>
