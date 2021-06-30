@@ -1,3 +1,5 @@
+import { Layout, Data } from 'plotly.js';
+
 export interface MetadataResponse {
   type: string
   class: string
@@ -26,13 +28,13 @@ export type PerformanceResponse =
   | RegressionPerformanceResponse;
 
 export interface FeatureImportanceResponse {
-  data: any
-  layout: any
+  data: Data
+  layout: Layout
 }
 
 export interface FeatureProfileResponse {
-  data: any
-  layout: any
+  data: Data
+  layout: Layout
 }
 
 export async function fetchMetadata(): Promise<MetadataResponse> {

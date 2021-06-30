@@ -11,9 +11,10 @@
     "lint": "eslint **/*.{ts,tsx}",
     "stryker": "stryker run"
   },
+  "private": true,
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Willem Meints",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/eslint-parser": "^7.14.7",
@@ -62,6 +63,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
+    "@types/plotly.js": "^1.54.10",
     "bootstrap": "^4.6.0",
     "canvas": "^2.8.0",
     "connected-react-router": "^6.9.1",

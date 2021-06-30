@@ -8,7 +8,9 @@ const Plot = createPlotlyComponent(Plotly);
 type OnFeatureSelected = (name: string) => void;
 
 interface FeatureImportanceProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   layout: any
   onFeatureSelected?: OnFeatureSelected
 }
@@ -29,6 +31,7 @@ const FeatureImportance: FeatureImportanceComponent = (props) => {
   const graphData = JSON.parse(JSON.stringify(data));
   const graphLayout = JSON.parse(JSON.stringify(layout));
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const selectFeature = (evt: any) => {
     const dataLabel = evt.points[0].label;
     if (onFeatureSelected) {

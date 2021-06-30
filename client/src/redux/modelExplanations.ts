@@ -1,17 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import { Data, Layout } from 'plotly.js';
 import * as actions from './actions';
 
 export interface ModelExplanationsState {
   loadingFeatureImportance: boolean
   loadingFeatureProfile: boolean
   featureImportance: {
-    data?: any
-    layout?: any
+    data?: Data
+    layout?: Layout
   },
   featureProfile?: {
-    data?: any
-    layout?: any
+    data?: Data
+    layout?: Layout
   }
 }
 
