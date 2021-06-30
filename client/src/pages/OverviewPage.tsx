@@ -12,9 +12,10 @@ const OverviewPage = (): React.ReactElement => {
   const {
     modelType,
     performance,
-    performanceDataLoading,
-    metadataLoading,
   } = useSelector((state: State) => state.metadata);
+
+  const isLoading = useSelector((state: State) => state.metadata.metadataLoading
+    || state.metadata.performanceDataLoading);
 
   const dispatch = useDispatch();
 
@@ -30,20 +31,19 @@ const OverviewPage = (): React.ReactElement => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <h4 className="mt-4 mb-4 page-title">Overview</h4>
+          <h1 className="mt-4 mb-4 h4">Overview</h1>
         </div>
       </div>
       <div className="row mb-3">
         <div className="col">
-          {metadataLoading && <LoadingIndicator text="Loading metadata..." />}
-          {!metadataLoading && <ModelType type={modelType} />}
+          {isLoading && <LoadingIndicator text="Loading data..." />}
+          {!isLoading && <ModelType type={modelType} />}
         </div>
       </div>
       <div className="row">
         <div className="col">
-          {performanceDataLoading && <LoadingIndicator text="Loading model performance data..." />}
-          {modelType === 'classification' && !performanceDataLoading && <ClassificationPerformance data={performance as ClassificationPerformanceState} />}
-          {modelType === 'regression' && !performanceDataLoading && <RegressionPerformance data={performance as RegressionPerformanceState} />}
+          {modelType === 'classification' && !isLoading && <ClassificationPerformance data={performance as ClassificationPerformanceState} />}
+          {modelType === 'regression' && !isLoading && <RegressionPerformance data={performance as RegressionPerformanceState} />}
         </div>
       </div>
     </div>
