@@ -63,7 +63,7 @@ def get_model_metadata(dashboard):
 
 def get_feature_importance(dashboard):
     """Retrieves the feature importance data for the model.
-    
+
     Parameters
     ----------
     dashboard : plsexplain.dashboard.Dashboard
@@ -73,15 +73,16 @@ def get_feature_importance(dashboard):
     Callable
         The API handler for the feature importance
     """
+
     def get_feature_importance_internal():
         return dashboard.feature_importance.to_dict()
-    
+
     return get_feature_importance_internal
 
 
 def get_feature_profile(dashboard):
     """Retrieves the feature profile for a feature
-    
+
     Parameters
     ----------
     dashboard : plsexplain.dashboard.Dashboard
@@ -91,9 +92,10 @@ def get_feature_profile(dashboard):
     Callable
         The API handler for the feature importance
     """
+
     def get_feature_profile_internal(name):
         graph_data = dashboard.model_profile.plot(variables=[name], show=False).to_json()
-        return Response(content=graph_data, media_type='application/json')
+        return Response(content=graph_data, media_type="application/json")
 
     return get_feature_profile_internal
 
