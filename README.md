@@ -1,5 +1,7 @@
 # Computer, please explain (plsexplain)
 
+![plsexplain - Feature importance](assets/dashboard-01.png)
+
 Create an explainable AI dashboard for your machine learning model. plsexplain,
 or please, explain is a question that you may want to ask your computer after
 you've trained a machine learning model.
