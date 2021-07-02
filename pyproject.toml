@@ -23,12 +23,16 @@ uvicorn = {extras = ["standard"], version = "^0.14.0"}
 fastapi = "^0.65.2"
 aiofiles = "^0.7.0"
 joblib = "^1.0.1"
+scikit-learn = "^0.24.2"
+pandas = "^1.2.5"
 
 [tool.poetry.dev-dependencies]
 Sphinx = "^4.0.2"
 pytest = "^6.2.4"
 black = {version = "^21.6b0", allow-prereleases = true}
 flake8 = "^3.9.2"
+sphinx-reload = "^0.2.0"
+pydata-sphinx-theme = "^0.6.3"
 
 [tool.poetry.scripts]
 plsexplain = "plsexplain.cli:main"

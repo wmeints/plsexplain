@@ -1,8 +1,64 @@
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 name: continuous-integration
 jobs:
-  build:
+  check-style:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout sources
+      - uses: actions/setup-node@v2
+        name: Setup node 14
+        with:
+          node-version: '14'
+      - uses: actions/setup-python@v1
+        name: Setup python 3.8
+        with: 
+          python-version: "3.8"
+      - uses: Gr1N/setup-poetry@v4
+        name: Setup poetry tooling
+      - run: npm install
+        working-directory: client
+        name: Install frontend dependencies
+      - run: poetry install
+        name: Install server dependencies
+      - run: npm run lint
+        name: Check typescript styles
+        working-directory: client
+      - run: poetry run flake8 plsexplain
+        name: Check sources for server
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout sources
+      - uses: actions/setup-node@v2
+        name: Setup node 14
+        with:
+          node-version: '14'
+      - uses: actions/setup-python@v1
+        name: Setup python 3.8
+        with: 
+          python-version: "3.8"
+      - uses: Gr1N/setup-poetry@v4
+        name: Setup poetry tooling
+      - run: npm install
+        working-directory: client
+        name: Install frontend dependencies
+      - run: poetry install
+        name: Install server dependencies
+      - run: npm test
+        working-directory: client
+        name: Run client unit-tests
+      - run: poetry run pytest
+        name: Run server unit-tests
+  package:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,21 +80,31 @@ jobs:
         name: Install server dependencies
       - run: poetry run pip install scikit-learn scipy pandas
         name: Install test dependencies 
-
-      - run: npm run lint
-        name: Check sources for frontend
-        working-directory: client
-      - run: npm test
-        name: Run unit-tests for frontend
         working-directory: client
       - run: npm run build
         name: Build frontend assets
         working-directory: client
-
-      - run: poetry run flake8 plsexplain
-        name: Check sources for server
-      - run: poetry run pytest
-        name: Run unit-tests for server
       - run: poetry build
         name: Package application
-
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout sources
+      - name: Setup python 3.8
+        uses: actions/setup-python@v1
+        with: 
+          python-version: "3.8"
+      - name: Setup poetry tooling
+        uses: Gr1N/setup-poetry@v4
+      - name: Install packages
+        run: poetry install
+      - name: Build documentation
+        run: make html
+        working-directory: docs
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build/html
+        if: github.event_name != 'pull_request'
