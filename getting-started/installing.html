@@ -122,10 +122,17 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
     <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
+ <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
    Installing
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="overview.html">
@@ -146,9 +153,24 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#system-requirements">
+   System requirements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-the-package">
+   Installing the package
+  </a>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -170,6 +192,39 @@
                 
   <div class="section" id="installing">
 <span id="id1"></span><h1>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h1>
+<p>In this we’ll discuss how to install <a class="reference internal" href="../index.html#module-plsexplain" title="plsexplain"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plsexplain</span></code></a> on your computer. We’ll cover the following topics:</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="system-requirements">
+<h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<p>You’ll need the following tools on your machine to use the <a class="reference internal" href="../index.html#module-plsexplain" title="plsexplain"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plsexplain</span></code></a>.</p>
+<ul class="simple">
+<li><p>Python 3.8 or higher</p></li>
+<li><p>A modern webbrowser</p></li>
+</ul>
+</div>
+<div class="section" id="installing-the-package">
+<h2>Installing the package<a class="headerlink" href="#installing-the-package" title="Permalink to this headline">¶</a></h2>
+<p>The tooling can be installed by using the following command</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install plsexplain
+</pre></div>
+</div>
+<p>After you’ve installed the package you can create a new dashboard using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>plsexplain &lt;model&gt; &lt;dataset&gt;
+</pre></div>
+</div>
+<p>Please make sure to provide the following arguments:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">model</span></code> - The path to the model stored using <code class="xref py py-mod docutils literal notranslate"><span class="pre">joblib</span></code>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">dataset</span></code> - The path to a dataset stored in CSV.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the CSV file has a header row, and uses comma as the field separator.</p>
+</div>
+<p>Now that you’ve learned how to create your first dashboard. Let’s take a look at what the <a class="reference internal" href="../index.html#module-plsexplain" title="plsexplain"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plsexplain</span></code></a> tool
+has to offer.</p>
+</div>
 </div>
 
 
