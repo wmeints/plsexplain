@@ -1,0 +1,13 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "extensions": [
+        "ms-python.python",
+        "snooty.snooty",
+        "orta.vscode-jest"
+    ],
+    "postStartCommand": "/workspaces/plsexplain/.devcontainer/setup-workspace.sh",
+    "remoteUser": "vscode"
+}
