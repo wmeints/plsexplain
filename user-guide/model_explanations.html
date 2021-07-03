@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basics &#8212; plsexplain 0.1.0 documentation</title>
+    <title>Model explanations &#8212; plsexplain 0.1.0 documentation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -33,7 +33,7 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Features" href="features.html" />
+    <link rel="next" title="Limitations" href="limitations.html" />
     <link rel="prev" title="User guide" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -124,12 +124,7 @@
     <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Basics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="features.html">
-   Features
+   Model explanations
   </a>
  </li>
  <li class="toctree-l1">
@@ -151,9 +146,24 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutation-feature-importance">
+   Permutation Feature Importance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accumulated-local-effects">
+   Accumulated Local Effects
+  </a>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -173,8 +183,23 @@
               
               <div>
                 
-  <div class="section" id="basics">
-<span id="id1"></span><h1>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="model-explanations">
+<span id="id1"></span><h1>Model explanations<a class="headerlink" href="#model-explanations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="permutation-feature-importance">
+<h2><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/feature-importance.html">Permutation Feature Importance</a><a class="headerlink" href="#permutation-feature-importance" title="Permalink to this headline">¶</a></h2>
+<p>This technique allows the tool to visualize the impact on the performance of a
+model when you permutate the values of a single feature. The performance impact is measured by using a suitable
+performance metric.</p>
+<p>In the case of a classification model we’ll use the accuracy metric. In the future you can specify the metric as an
+option on the command-line.</p>
+<p>For regression models the <a class="reference external" href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">RMSE metric</a> is used. This metric too can’t be changed at this moment.</p>
+</div>
+<div class="section" id="accumulated-local-effects">
+<h2><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/ale.html">Accumulated Local Effects</a><a class="headerlink" href="#accumulated-local-effects" title="Permalink to this headline">¶</a></h2>
+<p>When you select a feature in the dashboard, it will automatically plot the Accumulated Local Effects for the selected
+feature. This plot tells you more about the impact on the outcome of a model based on the change of value for the
+selected feature.</p>
+</div>
 </div>
 
 
@@ -184,7 +209,7 @@
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="index.html" title="previous page">User guide</a>
-    <a class='right-next' id="next-link" href="features.html" title="next page">Features</a>
+    <a class='right-next' id="next-link" href="limitations.html" title="next page">Limitations</a>
 
               </div>
               

@@ -10,6 +10,5 @@ cover the following topics:
 .. toctree::
     :maxdepth: 2
 
-    basics
-    features
+    model_explanations
     limitations

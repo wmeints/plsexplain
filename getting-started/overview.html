@@ -33,7 +33,7 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="User guide" href="../user-guide/index.html" />
+    <link rel="next" title="What’s new" href="whatsnew.html" />
     <link rel="prev" title="Installing" href="installing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -139,6 +139,11 @@
    Package overview
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="whatsnew.html">
+   What’s new
+  </a>
+ </li>
 </ul>
 
   </div>
@@ -153,9 +158,43 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#features">
+   Features
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-metrics">
+     Performance metrics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-explanations">
+     Model explanations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#command-line-interface">
+   Command-line interface
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plsexplain">
+     plsexplain
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -177,6 +216,72 @@
                 
   <div class="section" id="package-overview">
 <span id="id1"></span><h1>Package overview<a class="headerlink" href="#package-overview" title="Permalink to this headline">¶</a></h1>
+<p>In this section we’ll explore the basics of the plsexplain package.
+If you’re looking for a more in-depth explanation we recommend reading the <a class="reference internal" href="../user-guide/index.html#user-guide"><span class="std std-ref">User guide</span></a>.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="performance-metrics">
+<h3>Performance metrics<a class="headerlink" href="#performance-metrics" title="Permalink to this headline">¶</a></h3>
+<p>When you first open the dashboard, you’ll see the overview page with the performance metrics and some model metadata.
+Depending on the type of model you’ll see different metrics on this page.</p>
+<div class="figure align-default">
+<img alt="Model performance metrics" src="../_images/dashboard-00.png" />
+</div>
+</div>
+<div class="section" id="model-explanations">
+<h3>Model explanations<a class="headerlink" href="#model-explanations" title="Permalink to this headline">¶</a></h3>
+<p>The tool can be used to generate model explanations. You can view the model explanations when you navigate to the
+model navbar item at the top of the screen. You’ll get a screen that looks similar to the sample below:</p>
+<div class="figure align-default">
+<img alt="Model explanations section on the dashboard" src="../_images/dashboard-01.png" />
+</div>
+</div>
+</div>
+<div class="section" id="command-line-interface">
+<h2>Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plsexplain">
+<h3>plsexplain<a class="headerlink" href="#plsexplain" title="Permalink to this headline">¶</a></h3>
+<p>plsexplain &lt;model&gt; &lt;dataset&gt;</p>
+<p>Generates an explainable AI dashboard for your machine learning model stored in &lt;model&gt; using samples
+retrieved from &lt;dataset&gt;. The generated HTML report is opened in the default browser.</p>
+<p>We’re assuming you’ll provide a model stored using joblib. If the model fails to load here, you may
+want to check how you’ve saved your model.</p>
+<p>For the dataset we assume that you have a CSV file with a header that uses comma as the separator for fields.
+Please make sure you have a “outcome” column in your dataset containing the expected output of the model for
+each sample.</p>
+<p>The process of profiling your model will take longer when you provide a larger dataset. We recommend to keep
+the number of samples in the dataset below 500.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>plsexplain &lt;options&gt; &lt;model&gt; &lt;dataset&gt;
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-plsexplain-host">
+<span class="sig-name descname"><span class="pre">--host</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;host&gt;</span></span><a class="headerlink" href="#cmdoption-plsexplain-host" title="Permalink to this definition">¶</a></dt>
+<dd><p>The host the dashboard should be hosted on (default 127.0.0.1)</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-plsexplain-port">
+<span class="sig-name descname"><span class="pre">--port</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;port&gt;</span></span><a class="headerlink" href="#cmdoption-plsexplain-port" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HTTP port to serve the dashboard on (default 8000)</p>
+</dd></dl>
+
+<p class="rubric">Arguments</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-plsexplain-arg-model">
+<span class="sig-name descname"><span class="pre">&lt;model&gt;</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-plsexplain-arg-model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-plsexplain-arg-dataset">
+<span class="sig-name descname"><span class="pre">&lt;dataset&gt;</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-plsexplain-arg-dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+</div>
+</div>
 </div>
 
 
@@ -186,7 +291,7 @@
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="installing.html" title="previous page">Installing</a>
-    <a class='right-next' id="next-link" href="../user-guide/index.html" title="next page">User guide</a>
+    <a class='right-next' id="next-link" href="whatsnew.html" title="next page">What’s new</a>
 
               </div>
               
