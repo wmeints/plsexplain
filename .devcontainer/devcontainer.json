@@ -9,5 +9,9 @@
         "orta.vscode-jest"
     ],
     "postStartCommand": "/workspaces/plsexplain/.devcontainer/setup-workspace.sh",
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+    "forwardPorts": [
+        3000,
+        8000
+    ]
 }

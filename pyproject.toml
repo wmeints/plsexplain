@@ -5,7 +5,7 @@ description = "Create an explainable AI dashboard for your machine learning mode
 authors = ["Willem Meints <willem.meints@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/wmeints/plsexplain"
+homepage = "https://wmeints.github.io/plsexplain"
 repository = "https://github.com/wmeints/plsexplain"
 
 include = [
@@ -33,13 +33,19 @@ black = {version = "^21.6b0", allow-prereleases = true}
 flake8 = "^3.9.2"
 sphinx-reload = "^0.2.0"
 pydata-sphinx-theme = "^0.6.3"
+sphinx-click = "^3.0.1"
 
 [tool.poetry.scripts]
 plsexplain = "plsexplain.cli:main"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 120
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
