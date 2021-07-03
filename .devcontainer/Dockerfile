@@ -50,3 +50,4 @@ RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poet
 
 RUN chown -R ${USERNAME}:${USERNAME} $NVM_DIR
 RUN chown -R ${USERNAME}:${USERNAME} $POETRY_PATH
+RUN chown -R ${USERNAME}:${USERNAME} $VENV_PATH
