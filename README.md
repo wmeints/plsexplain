@@ -8,7 +8,8 @@ you've trained a machine learning model.
 
 ---
 
-[![pypi.org](https://img.shields.io/pypi/dm/plsexplain.svg)](https://pypi.org/project/plsexplain/)
+[![package](https://badge.fury.io/py/plsexplain.svg)](https://pypi.org/project/plsexplain/)
+[![downloads](https://img.shields.io/pypi/dm/plsexplain.svg)](https://pypi.org/project/plsexplain/)
 [![continuous-integration](https://github.com/wmeints/plsexplain/actions/workflows/ci.yml/badge.svg)](https://github.com/wmeints/plsexplain/actions/workflows/ci.yml)
 
 ## Getting started
