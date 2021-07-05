@@ -8,7 +8,7 @@
         "snooty.snooty",
         "orta.vscode-jest"
     ],
-    "postStartCommand": "cd client && npm install && cd -; poetry install",
+    "postStartCommand": "cd client && npm install && cd -; source /opt/venv/bin/activate; poetry install",
     "remoteUser": "vscode",
     "forwardPorts": [
         3000,
