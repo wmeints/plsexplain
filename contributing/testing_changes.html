@@ -128,6 +128,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="dev_environment.html">
+   Development environment
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="contributing_changes.html">
    Contributing changes
   </a>
@@ -140,11 +145,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="product_design.html">
    Product design
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="code_style.html">
-   Code style
   </a>
  </li>
 </ul>
@@ -161,9 +161,68 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-python-code">
+   Testing python code
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-the-python-tests">
+     Running the python tests
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-conventions">
+     Naming conventions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-fixtures">
+     Using fixtures
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-parameterized-tests">
+     Using parameterized tests
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-typescript-code">
+   Testing typescript code
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-typescript-tests">
+     Running typescript tests
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Naming conventions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mocking-and-stubbing">
+     Mocking and stubbing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-react-components">
+     Testing React components
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -185,6 +244,71 @@
                 
   <div class="section" id="testing-changes">
 <span id="id1"></span><h1>Testing changes<a class="headerlink" href="#testing-changes" title="Permalink to this headline">¶</a></h1>
+<p>In this section of the guide we focus on testing changes before submitting a pull request. We’ll cover how to write
+unit-tests for the python backend and the typescript frontend.</p>
+<div class="section" id="testing-python-code">
+<h2>Testing python code<a class="headerlink" href="#testing-python-code" title="Permalink to this headline">¶</a></h2>
+<p>We use <a class="reference external" href="https://docs.pytest.org/en/6.2.x/contents.html">pytest</a> as the unit-testing framework for Python code. We recommend you take a look at the <a class="reference external" href="https://docs.pytest.org/en/6.2.x/contents.html">pytest</a>
+documentation if you’re unfamiliar with how this framework works.</p>
+<div class="section" id="running-the-python-tests">
+<h3>Running the python tests<a class="headerlink" href="#running-the-python-tests" title="Permalink to this headline">¶</a></h3>
+<p>The python tests are run using the following poetry command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">poetry</span> <span class="n">run</span> <span class="n">pytest</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="naming-conventions">
+<h3>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h3>
+<p>In general we follow this naming pattern for files: <code class="code docutils literal notranslate"><span class="pre">tests/test_&lt;module&gt;.py</span></code>.
+Tests themselves follow this naming convention: <code class="code docutils literal notranslate"><span class="pre">test_&lt;snake_cased_description&gt;</span></code>.</p>
+<p>You can always check other tests to find out what the naming of a test case should look like.</p>
+</div>
+<div class="section" id="using-fixtures">
+<h3>Using fixtures<a class="headerlink" href="#using-fixtures" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://docs.pytest.org/en/6.2.x/contents.html">pytest</a> framework allows the use of <a class="reference external" href="https://docs.pytest.org/en/6.2.x/fixture.html">fixtures</a> to provide the test with mocks and stubs. We highly recommend
+using fixtures as they make the code much more readable and maintainable.</p>
+</div>
+<div class="section" id="using-parameterized-tests">
+<h3>Using parameterized tests<a class="headerlink" href="#using-parameterized-tests" title="Permalink to this headline">¶</a></h3>
+<p>We also recommend that you parameterize tests where it makes sense. For example, if you’re testing a single function
+with multiple input arguments that should return a specific result.</p>
+<p>You can read more about parameterizing tests in <a class="reference external" href="https://docs.pytest.org/en/6.2.x/parametrize.html">the documentation</a></p>
+</div>
+</div>
+<div class="section" id="testing-typescript-code">
+<h2>Testing typescript code<a class="headerlink" href="#testing-typescript-code" title="Permalink to this headline">¶</a></h2>
+<p>The application features a frontend written using React and Typescript. This code is tested using Jest.
+You can learn more about jest and jasmine in the <a class="reference external" href="https://jestjs.io/">Jest documentation</a>.</p>
+<div class="section" id="running-typescript-tests">
+<h3>Running typescript tests<a class="headerlink" href="#running-typescript-tests" title="Permalink to this headline">¶</a></h3>
+<p>You can run the typescript tests using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> client <span class="o">&amp;&amp;</span> npm <span class="nb">test</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> -
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Naming conventions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The unit-tests in the <code class="code docutils literal notranslate"><span class="pre">client</span></code> folder are named after the module they test.
+For example, <code class="code docutils literal notranslate"><span class="pre">App.tsx</span></code> has a test file <code class="code docutils literal notranslate"><span class="pre">App.spec.tsx</span></code> with the associated unit-tests. This makes it easier
+to find the tests in the frontend.</p>
+<p>We recommend giving tests a descriptive name, for example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;Renders App correctly&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{});</span>
+</pre></div>
+</div>
+<p>The tests are automatically grouped on their file name, so we can see which rendering test belongs to which component.
+It’s best to keep the test names a short as possible, but still clear to other developers working on the code.</p>
+</div>
+<div class="section" id="mocking-and-stubbing">
+<h3>Mocking and stubbing<a class="headerlink" href="#mocking-and-stubbing" title="Permalink to this headline">¶</a></h3>
+<p>We recommend using mocks and stubs for replacing external dependencies. You can learn more about mocks and stubs in
+<a class="reference external" href="https://jestjs.io/docs/mock-functions">the docs</a>.</p>
+</div>
+<div class="section" id="testing-react-components">
+<h3>Testing React components<a class="headerlink" href="#testing-react-components" title="Permalink to this headline">¶</a></h3>
+<p>We use snapshot testing for React components using <a class="reference external" href="https://enzymejs.github.io/enzyme/">Enzyme</a> this makes it easier to render shallow and deep versions
+of components. We recommend using <a class="reference external" href="https://enzymejs.github.io/enzyme/docs/api/ShallowWrapper/shallow.html">shallow rendering</a> if you can. This makes the test faster and more precise.</p>
+</div>
+</div>
 </div>
 
 

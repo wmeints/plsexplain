@@ -34,7 +34,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Testing changes" href="testing_changes.html" />
-    <link rel="prev" title="Reporting issues" href="reporting_issues.html" />
+    <link rel="prev" title="Development environment" href="dev_environment.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -127,6 +127,11 @@
    Reporting issues
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dev_environment.html">
+   Development environment
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Contributing changes
@@ -140,11 +145,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="product_design.html">
    Product design
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="code_style.html">
-   Code style
   </a>
  </li>
 </ul>
@@ -161,9 +161,29 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submitting-a-pull-request">
+   Submitting a pull request
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-style">
+   Code style
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#licensing-of-your-code-changes">
+   Licensing of your code changes
+  </a>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -185,6 +205,44 @@
                 
   <div class="section" id="contributing-changes">
 <span id="id1"></span><h1>Contributing changes<a class="headerlink" href="#contributing-changes" title="Permalink to this headline">¶</a></h1>
+<p>Pull requests are the best way to propose changes to the codebase. All our work
+is based on <a class="reference external" href="https://guides.github.com/introduction/flow/index.html">the git flow</a>. Changes are submitted through pull requests.
+The main branch can potentially be released.</p>
+<div class="section" id="submitting-a-pull-request">
+<h2>Submitting a pull request<a class="headerlink" href="#submitting-a-pull-request" title="Permalink to this headline">¶</a></h2>
+<p>Please follow these steps to submit a pull request:</p>
+<ol class="arabic simple">
+<li><p>Fork the repo and create your branch from <cite>main</cite>.</p></li>
+<li><p>If you’ve added code that should be tested, please include tests.</p></li>
+<li><p>If you’ve changed APIs, make sure to update the documentation.</p></li>
+<li><p>Ensure the test suite passes.</p></li>
+<li><p>Make sure your code passes the code-style checks.</p></li>
+<li><p>Issue that pull request!</p></li>
+</ol>
+<p>Please check the <a class="reference external" href="testing_changes">testing guide</a> to learn more on how to test various
+pieces of the code base.</p>
+</div>
+<div class="section" id="code-style">
+<h2>Code style<a class="headerlink" href="#code-style" title="Permalink to this headline">¶</a></h2>
+<p>We’re use linting tools and <cite>.editorconfig</cite> to enforce a consistent code style.
+This means the following:</p>
+<ul class="simple">
+<li><p><strong>For python code</strong>
+We use <a class="reference external" href="https://flake8.pycqa.org/en/latest/">flake8</a> to verify code style.
+We use <a class="reference external" href="https://github.com/psf/black">black</a> to format the code in the editor.</p></li>
+<li><p><strong>For typescript code</strong>
+We use <a class="reference external" href="https://eslint.org/">eslint</a> to verify code style and formatting.</p></li>
+</ul>
+<p>All files should have linux line-endings. This is configured using
+<a class="reference external" href="https://editorconfig.org/">.editorconfig</a>. Please make sure your editor supports the use of
+this file.</p>
+</div>
+<div class="section" id="licensing-of-your-code-changes">
+<h2>Licensing of your code changes<a class="headerlink" href="#licensing-of-your-code-changes" title="Permalink to this headline">¶</a></h2>
+<p>In short, when you submit code changes, your submissions are understood to be
+under the same <a class="reference external" href="https://opensource.org/licenses/MIT">MIT License</a> that covers the project. Feel free to
+contact the maintainers if that’s a concern.</p>
+</div>
 </div>
 
 
@@ -193,7 +251,7 @@
               
               <div class='prev-next-bottom'>
                 
-    <a class='left-prev' id="prev-link" href="reporting_issues.html" title="previous page">Reporting issues</a>
+    <a class='left-prev' id="prev-link" href="dev_environment.html" title="previous page">Development environment</a>
     <a class='right-next' id="next-link" href="testing_changes.html" title="next page">Testing changes</a>
 
               </div>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Code style &#8212; plsexplain 0.1.0 documentation</title>
+    <title>Development environment &#8212; plsexplain 0.1.0 documentation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -33,7 +33,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Product design" href="product_design.html" />
+    <link rel="next" title="Contributing changes" href="contributing_changes.html" />
+    <link rel="prev" title="Reporting issues" href="reporting_issues.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -126,6 +127,11 @@
    Reporting issues
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Development environment
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="contributing_changes.html">
    Contributing changes
@@ -139,11 +145,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="product_design.html">
    Product design
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Code style
   </a>
  </li>
 </ul>
@@ -160,9 +161,29 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#system-requirements">
+   System requirements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opening-the-solution">
+   Opening the solution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solution-structure">
+   Solution structure
+  </a>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -182,8 +203,46 @@
               
               <div>
                 
-  <div class="section" id="code-style">
-<span id="id1"></span><h1>Code style<a class="headerlink" href="#code-style" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="development-environment">
+<span id="dev-environment"></span><h1>Development environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h1>
+<p>In this section we’ll explain how to configure your machine to develop new features and fix bugs in plsexplain.</p>
+<div class="section" id="system-requirements">
+<h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<p>To make changes to the code, you’ll need the following on your system:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.docker.com/products/docker-desktop">Docker</a></p></li>
+<li><p><a class="reference external" href="https://code.visualstudio.com">Visual Studio Code</a></p></li>
+</ul>
+<p>Make sure you have the <cite>Remote containers extension</cite> for Visual Studio Code installed.</p>
+</div>
+<div class="section" id="opening-the-solution">
+<h2>Opening the solution<a class="headerlink" href="#opening-the-solution" title="Permalink to this headline">¶</a></h2>
+<p>The code for plsexplain is self-contained in a Docker container. That’s why you only need Docker and Visual Studio Code
+to work on this product. We recommend you follow these steps:</p>
+<ul class="simple">
+<li><p>Clone the code from <code class="code docutils literal notranslate"><span class="pre">https://github.com/wmeints/plsexplain</span></code></p></li>
+<li><p>Open the <code class="code docutils literal notranslate"><span class="pre">plsexplain</span></code> folder in Visual Studio Code</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> and select <em>Remote-Containers: Reopen in Container</em></p></li>
+</ul>
+<p>The last step will build the docker container, and setup all the dependencies. After this is done you can start writing
+code and testing changes. By default we open port <code class="code docutils literal notranslate"><span class="pre">3000</span></code> and <code class="code docutils literal notranslate"><span class="pre">8000</span></code> so you can run the frontend and backend
+inside the development container.</p>
+</div>
+<div class="section" id="solution-structure">
+<h2>Solution structure<a class="headerlink" href="#solution-structure" title="Permalink to this headline">¶</a></h2>
+<p>The solution is roughly split into two components, a client, and a python package that hosts the compiled resources
+from the client package. The solution is structured as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├───.devcontainer           # Development environment configuration
+├───.github                 # Github configuration
+├───assets                  # Images used in the README file
+├───client                  # Client code used in the dashboard
+├───docs                    # Documentation source code
+├───plsexplain              # Python source code
+├───sample                  # Sample models and datasets
+└───tests                   # Test code for the python module
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -192,7 +251,8 @@
               
               <div class='prev-next-bottom'>
                 
-    <a class='left-prev' id="prev-link" href="product_design.html" title="previous page">Product design</a>
+    <a class='left-prev' id="prev-link" href="reporting_issues.html" title="previous page">Reporting issues</a>
+    <a class='right-next' id="next-link" href="contributing_changes.html" title="next page">Contributing changes</a>
 
               </div>
               
