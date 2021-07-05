@@ -1,10 +1,12 @@
-# Computer, please explain (plsexplain)
+![plsexplain logo](assets/logo_transparent_background.png)
 
-![plsexplain - Feature importance](assets/dashboard-01.png)
+---
 
 Create an explainable AI dashboard for your machine learning model. plsexplain,
 or please, explain is a question that you may want to ask your computer after
 you've trained a machine learning model.
+
+---
 
 ## Getting started
 
@@ -29,14 +31,20 @@ The sample set, is a small dataset containing samples you want to use in the
 dashboard for explanations based on sample data. We only support using
 CSV files at the moment.
 
+## Documentation
+
 Please refer to the documentation for more information on how to use the tool
 for various types of models and sample datasets.
+
+[📖 Read the documentation][DOCUMENTATION]
 
 ## Contributing
 
 We welcome contributions to this project. Please refer to the
-[Contributor guide][CONTRIBUTOR_GUIDE] for more information on how to submit
+developer guide for more information on how to submit
 issues and pull requests for this project.
+
+[🛠 Read the developer guide][CONTRIBUTOR_GUIDE]
 
 ## Code of conduct
 
@@ -44,4 +52,5 @@ Please make sure to follow our [code of conduct][CODE_OF_CONDUCT] when
 interacting with other contributors on this project.
 
 [CODE_OF_CONDUCT]: CODE_OF_CONDUCT.md
-[CONTRIBUTOR_GUIDE]: CONTRIBUTING.md
+[CONTRIBUTOR_GUIDE]: https://wmeints.github.io/plsexplain/contributing/index.html
+[DOCUMENTATION]: https://wmeints.github.io/plsexplain
