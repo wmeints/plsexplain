@@ -8,7 +8,7 @@
         "snooty.snooty",
         "orta.vscode-jest"
     ],
-    "postStartCommand": "/workspaces/plsexplain/.devcontainer/setup-workspace.sh",
+    "postStartCommand": "cd client && npm install && cd -; poetry install",
     "remoteUser": "vscode",
     "forwardPorts": [
         3000,
