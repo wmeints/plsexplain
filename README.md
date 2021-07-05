@@ -8,6 +8,9 @@ you've trained a machine learning model.
 
 ---
 
+[![pypi.org](https://img.shields.io/pypi/dm/plsexplain.svg)](https://pypi.org/project/plsexplain/)
+[![continuous-integration](https://github.com/wmeints/plsexplain/actions/workflows/ci.yml/badge.svg)](https://github.com/wmeints/plsexplain/actions/workflows/ci.yml)
+
 ## Getting started
 
 You can install this tool as a python package on your machine by using the
