@@ -81,9 +81,11 @@ jobs:
         name: Install frontend dependencies
       - run: poetry install
         name: Install server dependencies
-      - run: poetry run pip install scikit-learn scipy pandas
-        name: Install test dependencies 
+      - name: Activate Kendo UI License
+        run: npx kendo-ui-license activate
         working-directory: client
+        env:
+          KENDO_UI_LICENSE: ${{ secrets.KENDO_UI_LICENSE }}
       - run: npm run build
         name: Build frontend assets
         working-directory: client

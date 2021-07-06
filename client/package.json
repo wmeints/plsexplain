@@ -61,6 +61,8 @@
     "webpack-dev-server": "^4.0.0-beta.3"
   },
   "dependencies": {
+    "@progress/kendo-licensing": "^1.1.4",
+    "@progress/kendo-theme-bootstrap": "^4.36.0",
     "@reduxjs/toolkit": "^1.6.0",
     "@types/plotly.js": "^1.54.10",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
