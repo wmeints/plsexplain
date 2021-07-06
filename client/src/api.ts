@@ -38,7 +38,10 @@ export interface FeatureProfileResponse {
 }
 
 export interface DataSetResponse {
-  data: Array<{ [key : string] : string}>
+  data: Array<{ [key : string] : string}>,
+  metadata: {
+    columns: Array<string>
+  }
   pager: {
     skip: number,
     take: number,
@@ -74,8 +77,8 @@ export async function fetchFeatureProfile(name: string): Promise<FeatureProfileR
   return data;
 }
 
-export async function fetchDataSet(page: number): Promise<DataSetResponse> {
-  const response = await fetch(`/api/data?page=${page}`);
+export async function fetchDataSet(skip: number, take: number): Promise<DataSetResponse> {
+  const response = await fetch(`/api/data?skip=${skip}&take=${take}`);
   const data = await response.json();
 
   return data;

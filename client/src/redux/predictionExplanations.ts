@@ -10,6 +10,9 @@ export interface PredictionExplanationsState {
   }
   data: Array<{ [key: string]: string }>
   loadingData: boolean
+  metadata: {
+    columns: Array<string>
+  }
 }
 
 const initialState: PredictionExplanationsState = {
@@ -20,6 +23,9 @@ const initialState: PredictionExplanationsState = {
   },
   data: [],
   loadingData: true,
+  metadata: {
+    columns: [],
+  },
 };
 
 const predictionExplanations = createSlice({
@@ -31,6 +37,7 @@ const predictionExplanations = createSlice({
       state.data = action.payload.data;
       state.pager = action.payload.pager;
       state.loadingData = false;
+      state.metadata = action.payload.metadata;
     });
   },
 });

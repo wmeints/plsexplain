@@ -12,6 +12,9 @@ function applyFetchDataSetFulfilled() {
         take: 20,
         total: 0,
       },
+      metadata: {
+        columns: ['stuff', 'things'],
+      },
     },
   };
 
@@ -41,6 +44,9 @@ describe('fetchDataSet action', () => {
         total: 0,
       },
       loadingData: false,
+      metadata: {
+        columns: ['stuff', 'things'],
+      },
     };
 
     beforeEach(() => { state = applyFetchDataSetFulfilled(); });
@@ -51,6 +57,10 @@ describe('fetchDataSet action', () => {
 
     it('updates the data', () => {
       expect(state.data.length).toBe(1);
+    });
+
+    it('updates metadata', () => {
+      expect(state.metadata).toMatchObject({ columns: ['stuff', 'things'] });
     });
   });
 });
