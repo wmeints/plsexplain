@@ -2,6 +2,7 @@ from os.path import dirname, abspath, join, isfile
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse, Response
+import json
 
 
 def get_model_performance(dashboard):
@@ -100,6 +101,40 @@ def get_feature_profile(dashboard):
     return get_feature_profile_internal
 
 
+def get_dataset(dashboard):
+    """Retrieves the dataset
+    
+    Parameters:
+    -----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the dataset
+    """
+
+    def get_dataset_internal(skip, take):
+        skip = int(skip)
+        take = int(take)
+        data = dashboard.raw_data
+        page = data.iloc[skip:skip+take, :]
+
+        return {
+            'data': page.to_dict(orient='records'),
+            'pager': {
+                'skip': int(skip),
+                'take': int(take),
+                'total': len(data.index)
+            },
+            'metadata': {
+                'columns': data.columns.tolist()
+            }
+        }
+    
+    return get_dataset_internal
+
+
 def get_client_app(sub_path):
     """Retrieves content for the client app as long as it's not coming from the static folder.
 
@@ -147,6 +182,7 @@ def make_server(dashboard):
     app.add_api_route("/api/performance", get_model_performance(dashboard), methods=["get"])
     app.add_api_route("/api/model/features", get_feature_importance(dashboard), methods=["get"])
     app.add_api_route("/api/model/features/{name:str}", get_feature_profile(dashboard), methods=["get"])
+    app.add_api_route("/api/dataset", get_dataset(dashboard), methods=['get'])
     app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
 

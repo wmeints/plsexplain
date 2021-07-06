@@ -83,5 +83,7 @@ class Dashboard:
             "y": df[self.output_column],
         }
 
+        self.raw_data = df
+
     def _load_model(self):
         self.model = joblib.load(self.model_file)
