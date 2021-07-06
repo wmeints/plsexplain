@@ -37,6 +37,15 @@ export interface FeatureProfileResponse {
   layout: Layout
 }
 
+export interface DataSetResponse {
+  data: Array<{ [key : string] : string}>
+  pager: {
+    skip: number,
+    take: number,
+    total: number
+  }
+}
+
 export async function fetchMetadata(): Promise<MetadataResponse> {
   const response = await fetch('/api/metadata');
   const data = await response.json();
@@ -60,6 +69,13 @@ export async function fetchFeatureImportance(): Promise<FeatureImportanceRespons
 
 export async function fetchFeatureProfile(name: string): Promise<FeatureProfileResponse> {
   const response = await fetch(`/api/model/features/${name}`);
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchDataSet(page: number): Promise<DataSetResponse> {
+  const response = await fetch(`/api/data?page=${page}`);
   const data = await response.json();
 
   return data;

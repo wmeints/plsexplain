@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../api';
 import {
+  DataSetResponse,
   FeatureImportanceResponse,
   FeatureProfileResponse,
   MetadataResponse,
@@ -9,6 +10,10 @@ import {
 
 interface FetchFeatureProfilePayload {
     name: string
+}
+
+interface FetchDataSetPayload {
+  page: number
 }
 
 export const fetchMetadata = createAsyncThunk<MetadataResponse>('metadata/fetch', async () => {
@@ -28,5 +33,10 @@ export const fetchFeatureImportance = createAsyncThunk<FeatureImportanceResponse
 
 export const fetchFeatureProfile = createAsyncThunk<FeatureProfileResponse, FetchFeatureProfilePayload>('feature-profile/fetch', async (payload) => {
   const data = await api.fetchFeatureProfile(payload.name);
+  return data;
+});
+
+export const fetchDataSet = createAsyncThunk<DataSetResponse, FetchDataSetPayload>('predictions/fetch-dataset', async (payload) => {
+  const data = await api.fetchDataSet(payload.page);
   return data;
 });
