@@ -62,6 +62,7 @@
   },
   "dependencies": {
     "@progress/kendo-licensing": "^1.1.4",
+    "@progress/kendo-react-common": "^4.7.0",
     "@progress/kendo-react-grid": "^4.7.0",
     "@progress/kendo-theme-bootstrap": "^4.36.0",
     "@reduxjs/toolkit": "^1.6.0",

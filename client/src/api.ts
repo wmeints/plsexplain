@@ -78,7 +78,7 @@ export async function fetchFeatureProfile(name: string): Promise<FeatureProfileR
 }
 
 export async function fetchDataSet(skip: number, take: number): Promise<DataSetResponse> {
-  const response = await fetch(`/api/data?skip=${skip}&take=${take}`);
+  const response = await fetch(`/api/dataset?skip=${skip}&take=${take}`);
   const data = await response.json();
 
   return data;
