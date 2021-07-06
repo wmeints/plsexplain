@@ -1,5 +1,5 @@
 from os.path import dirname, abspath, join, isfile
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse, Response
 import json
@@ -153,8 +153,17 @@ def get_client_app(sub_path):
 
     asset_path = join(client_folder, sub_path)
 
+    # We don't want to send index.html for static assets, this makes sure we 
+    # handle this case correctly.
     if isfile(asset_path):
         return FileResponse(asset_path)
+
+    # We need to make sure that we reply with a 404 for non-existing API endpoints.
+    # Otherwise the API handlers in the client code mess up big time.
+    if sub_path.startswith('api/'):
+        return Response(
+            json.dumps({ 'message': 'Location not found.' }),
+            media_type='application/json')
 
     with open(root_file) as doc:
         return doc.read()
