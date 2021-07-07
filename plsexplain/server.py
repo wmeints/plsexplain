@@ -1,5 +1,5 @@
 from os.path import dirname, abspath, join, isfile
-from fastapi import FastAPI, status
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse, Response
 import json
@@ -103,7 +103,7 @@ def get_feature_profile(dashboard):
 
 def get_dataset(dashboard):
     """Retrieves the dataset
-    
+
     Parameters:
     -----------
     dashboard : plsexplain.dashboard.Dashboard
@@ -118,20 +118,14 @@ def get_dataset(dashboard):
         skip = int(skip)
         take = int(take)
         data = dashboard.raw_data
-        page = data.iloc[skip:skip+take, :]
+        page = data.iloc[skip : skip + take, :]
 
         return {
-            'data': page.to_dict(orient='records'),
-            'pager': {
-                'skip': int(skip),
-                'take': int(take),
-                'total': len(data.index)
-            },
-            'metadata': {
-                'columns': data.columns.tolist()
-            }
+            "data": page.to_dict(orient="records"),
+            "pager": {"skip": int(skip), "take": int(take), "total": len(data.index)},
+            "metadata": {"columns": data.columns.tolist()},
         }
-    
+
     return get_dataset_internal
 
 
@@ -153,17 +147,15 @@ def get_client_app(sub_path):
 
     asset_path = join(client_folder, sub_path)
 
-    # We don't want to send index.html for static assets, this makes sure we 
+    # We don't want to send index.html for static assets, this makes sure we
     # handle this case correctly.
     if isfile(asset_path):
         return FileResponse(asset_path)
 
     # We need to make sure that we reply with a 404 for non-existing API endpoints.
     # Otherwise the API handlers in the client code mess up big time.
-    if sub_path.startswith('api/'):
-        return Response(
-            json.dumps({ 'message': 'Location not found.' }),
-            media_type='application/json')
+    if sub_path.startswith("api/"):
+        return Response(json.dumps({"message": "Location not found."}), media_type="application/json")
 
     with open(root_file) as doc:
         return doc.read()
@@ -191,7 +183,7 @@ def make_server(dashboard):
     app.add_api_route("/api/performance", get_model_performance(dashboard), methods=["get"])
     app.add_api_route("/api/model/features", get_feature_importance(dashboard), methods=["get"])
     app.add_api_route("/api/model/features/{name:str}", get_feature_profile(dashboard), methods=["get"])
-    app.add_api_route("/api/dataset", get_dataset(dashboard), methods=['get'])
+    app.add_api_route("/api/dataset", get_dataset(dashboard), methods=["get"])
     app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
 
