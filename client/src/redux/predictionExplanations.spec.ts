@@ -1,4 +1,5 @@
 import reducer, { PredictionExplanationsState } from './predictionExplanations';
+import * as actions from './actions';
 
 function applyFetchDataSetFulfilled() {
   const action = {
@@ -27,6 +28,20 @@ function createInitialState() {
   return state;
 }
 
+function applyFetchBreakdownFulfilled() {
+  const action = {
+    type: 'predictions/fetch-breakdown/fulfilled',
+    payload: {
+      data: [],
+      layout: {},
+    },
+  };
+
+  const result = reducer(undefined, action);
+
+  return result;
+}
+
 test('should return initial state', () => {
   const result = createInitialState();
 
@@ -47,6 +62,7 @@ describe('fetchDataSet action', () => {
       metadata: {
         columns: ['stuff', 'things'],
       },
+      selectionState: {},
     };
 
     beforeEach(() => { state = applyFetchDataSetFulfilled(); });
@@ -62,5 +78,34 @@ describe('fetchDataSet action', () => {
     it('updates metadata', () => {
       expect(state.metadata).toMatchObject({ columns: ['stuff', 'things'] });
     });
+  });
+});
+
+describe('fetchBreakdown action', () => {
+  describe('when fulfilled', () => {
+    let state: PredictionExplanationsState | undefined;
+
+    beforeEach(() => { state = applyFetchBreakdownFulfilled(); });
+
+    it('unsets the loading state', () => {
+      expect(state!.loadingBreakdown).toBe(false);
+    });
+
+    it('updates the breakdown', () => {
+      expect(state!.predictionBreakdown).toMatchObject({
+        data: [],
+        layout: {},
+      });
+    });
+  });
+});
+
+describe('updatePredictionSelection', () => {
+  it('updates the selection state', () => {
+    const state = reducer(undefined, actions.updatePredictionSelection({
+      test: true,
+    }));
+
+    expect(state.selectionState).toMatchObject({ test: true });
   });
 });

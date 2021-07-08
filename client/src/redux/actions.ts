@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../api';
 import {
   DataSetResponse,
@@ -6,6 +6,7 @@ import {
   FeatureProfileResponse,
   MetadataResponse,
   PerformanceResponse,
+  PredictionBreakdownResponse,
 } from '../api';
 
 interface FetchFeatureProfilePayload {
@@ -15,6 +16,14 @@ interface FetchFeatureProfilePayload {
 interface FetchDataSetPayload {
   skip: number
   take: number
+}
+
+interface FetchPredictionBreakdownPayload {
+  index: number
+}
+
+interface UpdateSelectionPayload {
+  [ key: string]: boolean | number []
 }
 
 export const fetchMetadata = createAsyncThunk<
@@ -49,3 +58,15 @@ export const fetchDataSet = createAsyncThunk<DataSetResponse, FetchDataSetPayloa
     return data;
   },
 );
+
+export const fetchPredictionBreakdown = createAsyncThunk<
+  PredictionBreakdownResponse,
+  FetchPredictionBreakdownPayload
+>(
+  'predictions/fetch-breakdown', async (payload) => {
+    const data = await api.fetchPredictionBreakdown(payload.index);
+    return data;
+  },
+);
+
+export const updatePredictionSelection = createAction<UpdateSelectionPayload>('updatePredictionSelection');
