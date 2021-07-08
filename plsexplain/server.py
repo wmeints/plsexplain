@@ -1,3 +1,5 @@
+"""This module implements the API endpoints for the dashboard."""
+
 from os.path import dirname, abspath, join, isfile
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
@@ -101,6 +103,29 @@ def get_feature_profile(dashboard):
     return get_feature_profile_internal
 
 
+def get_prediction_breakdown(dashboard):
+    """Retrieves the prediction breakdown
+
+    Parameters:
+    ----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the prediction breakdown
+    """
+
+    def get_prediction_explanation_internal(index):
+        breakdown_data = dashboard.explainer.predict_parts(
+            dashboard.data['x'].iloc[[int(index)]], type="break_down_interactions"
+        ).plot(show=False)
+
+        return breakdown_data.to_dict()
+
+    return get_prediction_explanation_internal
+
+
 def get_dataset(dashboard):
     """Retrieves the dataset
 
@@ -184,6 +209,7 @@ def make_server(dashboard):
     app.add_api_route("/api/model/features", get_feature_importance(dashboard), methods=["get"])
     app.add_api_route("/api/model/features/{name:str}", get_feature_profile(dashboard), methods=["get"])
     app.add_api_route("/api/dataset", get_dataset(dashboard), methods=["get"])
+    app.add_api_route("/api/predictions/{index:int}/breakdown", get_prediction_breakdown(dashboard), methods=["get"])
     app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
 
