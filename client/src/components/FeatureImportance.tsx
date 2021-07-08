@@ -1,6 +1,7 @@
 import React from 'react';
 import Plotly from 'plotly.js-dist';
 import createPlotlyComponent from 'react-plotly.js/factory';
+import { Data, Layout } from 'plotly.js';
 
 const Plot = createPlotlyComponent(Plotly);
 
@@ -8,10 +9,8 @@ const Plot = createPlotlyComponent(Plotly);
 type OnFeatureSelected = (name: string) => void;
 
 interface FeatureImportanceProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  layout: any
+  data: Data | undefined
+  layout: Layout | undefined
   onFeatureSelected?: OnFeatureSelected
 }
 
