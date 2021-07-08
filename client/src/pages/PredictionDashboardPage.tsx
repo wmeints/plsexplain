@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import './PredictionDashboard.scss';
 import {
   Grid,
@@ -13,10 +13,6 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import * as actions from '../redux/actions';
 import '@progress/kendo-theme-bootstrap/scss/grid/_index.scss';
 import PredictionBreakdown from '../components/PredictionBreakdown';
-
-interface GridSelectionState {
-  [ key: string]: boolean | number []
-}
 
 const PredictionDashboardPage = (): ReactElement => {
   const {

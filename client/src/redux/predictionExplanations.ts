@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createReducer, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { Data, Layout } from 'plotly.js';
 import * as actions from './actions';
 

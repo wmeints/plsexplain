@@ -59,6 +59,7 @@ describe('fetchDataSet action', () => {
         total: 0,
       },
       loadingData: false,
+      loadingBreakdown: false,
       metadata: {
         columns: ['stuff', 'things'],
       },
@@ -83,16 +84,16 @@ describe('fetchDataSet action', () => {
 
 describe('fetchBreakdown action', () => {
   describe('when fulfilled', () => {
-    let state: PredictionExplanationsState | undefined;
+    let state: PredictionExplanationsState;
 
     beforeEach(() => { state = applyFetchBreakdownFulfilled(); });
 
     it('unsets the loading state', () => {
-      expect(state!.loadingBreakdown).toBe(false);
+      expect(state.loadingBreakdown).toBe(false);
     });
 
     it('updates the breakdown', () => {
-      expect(state!.predictionBreakdown).toMatchObject({
+      expect(state.predictionBreakdown).toMatchObject({
         data: [],
         layout: {},
       });
