@@ -12,6 +12,7 @@ import { State } from '../redux/store';
 import LoadingIndicator from '../components/LoadingIndicator';
 import * as actions from '../redux/actions';
 import '@progress/kendo-theme-bootstrap/scss/grid/_index.scss';
+import PredictionBreakdown from '../components/PredictionBreakdown';
 
 interface GridSelectionState {
   [ key: string]: boolean | number []
@@ -22,12 +23,13 @@ const PredictionDashboardPage = (): ReactElement => {
     data,
     pager,
     loadingData,
+    loadingBreakdown,
+    predictionBreakdown,
     metadata,
+    selectionState,
   } = useSelector((state: State) => state.predictionExplanations);
 
   const dispatch = useDispatch();
-
-  const [selectionState, setSelectionState] = useState<GridSelectionState>({});
 
   const updatePage = (evt: GridPageChangeEvent) => {
     dispatch(actions.fetchDataSet({
@@ -43,7 +45,10 @@ const PredictionDashboardPage = (): ReactElement => {
       dataItemKey: 'key',
     });
 
-    setSelectionState(newSelectedState);
+    const itemIndex = evt.dataItems[evt.startRowIndex].key;
+
+    dispatch(actions.updatePredictionSelection(newSelectedState));
+    dispatch(actions.fetchPredictionBreakdown({ index: itemIndex }));
   };
 
   useEffect(() => {
@@ -104,20 +109,21 @@ const PredictionDashboardPage = (): ReactElement => {
           <div className="col">
             <h1 className="mt-4 mb-4 h4">Prediction breakdown</h1>
           </div>
-          <div className="col">
-            <h1 className="mt-4 mb-4 h4">Feature profile</h1>
-          </div>
         </div>
         <div className="row">
           <div className="col">
-            <div className="card shadow-sm">
-              <div className="card-body">TODO: Chart</div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="card shadow-sm">
-              <div className="card-body">TODO: Chart</div>
-            </div>
+            {loadingBreakdown && (
+              <LoadingIndicator text="Breaking down the prediction..." />
+            )}
+            {!loadingBreakdown && predictionBreakdown && (
+              <PredictionBreakdown
+                data={predictionBreakdown.data}
+                layout={predictionBreakdown.layout}
+              />
+            )}
+            {!loadingBreakdown && !predictionBreakdown && (
+              <p className="text-muted">Please select a prediction from the table to see the breakdown.</p>
+            )}
           </div>
         </div>
       </div>
