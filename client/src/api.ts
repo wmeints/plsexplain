@@ -49,6 +49,11 @@ export interface DataSetResponse {
   }
 }
 
+export interface PredictionBreakdownResponse {
+  data: Data
+  layout: Layout
+}
+
 export async function fetchMetadata(): Promise<MetadataResponse> {
   const response = await fetch('/api/metadata');
   const data = await response.json();
@@ -79,6 +84,15 @@ export async function fetchFeatureProfile(name: string): Promise<FeatureProfileR
 
 export async function fetchDataSet(skip: number, take: number): Promise<DataSetResponse> {
   const response = await fetch(`/api/dataset?skip=${skip}&take=${take}`);
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchPredictionBreakdown(
+  index: number,
+): Promise<PredictionBreakdownResponse> {
+  const response = await fetch(`/api/predictions/${index}/breakdown`);
   const data = await response.json();
 
   return data;
