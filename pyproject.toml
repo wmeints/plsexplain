@@ -34,6 +34,7 @@ flake8 = "^3.9.2"
 sphinx-reload = "^0.2.0"
 pydata-sphinx-theme = "^0.6.3"
 sphinx-click = "^3.0.1"
+pytest-cov = "^2.12.1"
 
 [tool.poetry.scripts]
 plsexplain = "plsexplain.cli:main"
