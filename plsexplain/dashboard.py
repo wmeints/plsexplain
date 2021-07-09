@@ -69,6 +69,25 @@ class Dashboard:
         app = make_server(self)
         uvicorn.run(app, host=host, port=port)
 
+    def breakdown_prediction(self, x):
+        """Returns a breakdown of a prediction
+        
+        Parameters
+        ----------
+        x : int
+            The index of the data sample to break down
+        
+        Returns
+        -------
+        dict
+            A dictionary containing the breakdown of the prediction
+        """
+        breakdown_data = self.explainer.predict_parts(
+            self.data['x'].iloc[[int(x)]], type="break_down_interactions"
+        ).plot(show=False)
+
+        return breakdown_data.to_dict()
+
     def _load_dataset(self):
         df = pd.read_csv(self.dataset_file)
         available_columns = [col.lower() for col in df.columns]
@@ -84,6 +103,7 @@ class Dashboard:
         }
 
         self.raw_data = df
+        self.raw_data['key'] = self.raw_data.index
 
     def _load_model(self):
         self.model = joblib.load(self.model_file)

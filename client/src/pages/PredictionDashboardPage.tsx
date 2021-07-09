@@ -73,10 +73,9 @@ const PredictionDashboardPage = (): ReactElement => {
             <div className="col">
               <Grid
                 style={{ height: '300px' }}
-                data={data.map((item, index) => ({
+                data={data.map((item) => ({
                   ...item,
-                  key: index,
-                  selected: selectionState[index],
+                  selected: selectionState[item.key],
                 }))}
                 pageable
                 total={pager.total}

@@ -117,11 +117,7 @@ def get_prediction_breakdown(dashboard):
     """
 
     def get_prediction_explanation_internal(index):
-        breakdown_data = dashboard.explainer.predict_parts(
-            dashboard.data['x'].iloc[[int(index)]], type="break_down_interactions"
-        ).plot(show=False)
-
-        return breakdown_data.to_dict()
+        return dashboard.breakdown_prediction(index)
 
     return get_prediction_explanation_internal
 
