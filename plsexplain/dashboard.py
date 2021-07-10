@@ -93,39 +93,39 @@ class Dashboard:
 
     def breakdown_prediction(self, x):
         """Returns a breakdown of a prediction
-        
+
         Parameters
         ----------
         x : int
             The index of the data sample to break down
-        
+
         Returns
         -------
         dict
             A dictionary containing the breakdown of the prediction
         """
         breakdown_data = self.explainer.predict_parts(
-            self.data['x'].iloc[[int(x)]], type="break_down_interactions"
+            self.data["x"].iloc[[int(x)]], type="break_down_interactions"
         ).plot(show=False)
 
         return breakdown_data.to_dict()
 
     def profile_prediction_feature(self, index, feature):
         """Returns a profile of a feature in the model for a prediction.
-        
+
         Parameters
         ----------
         index : int
             The index of the data sample to profile
         feature : str
             The name of the feature to profile
-        
+
         Returns
         -------
         dict
             A dictionary containing the profile of the feature
         """
-        graph_data = self.explainer.predict_profile(self.data['x'].iloc[[index]]).plot(variables=[feature], show=False)
+        graph_data = self.explainer.predict_profile(self.data["x"].iloc[[index]]).plot(variables=[feature], show=False)
         return graph_data.to_json()
 
     def _load_dataset(self):
@@ -143,7 +143,7 @@ class Dashboard:
         }
 
         self.raw_data = df
-        self.raw_data['key'] = self.raw_data.index
+        self.raw_data["key"] = self.raw_data.index
 
     def _load_model(self):
         self.model = joblib.load(self.model_file)
