@@ -61,29 +61,15 @@ test('should return initial state', () => {
 
   expect(result.data.length).toBe(0);
   expect(result.pager).toMatchObject({ skip: 0, take: 20, total: 0 });
+  expect(result.loadingBreakdown).toBe(false);
+  expect(result.loadingFeatureProfile).toBe(false);
+  expect(result.loadingData).toBe(true);
+  expect(result.metadata).toMatchObject({ columns: [] });
 });
 
 describe('fetchDataSet action', () => {
   describe('when fulfilled', () => {
-    let state: PredictionExplanationsState = {
-      data: [],
-      pager: {
-        skip: 0,
-        take: 20,
-        total: 0,
-      },
-      loadingData: false,
-      loadingBreakdown: false,
-      loadingFeatureProfile: false,
-      featureSelection: {
-        index: 0,
-        feature: 'PAY_1',
-      },
-      metadata: {
-        columns: ['stuff', 'things'],
-      },
-      selectionState: {},
-    };
+    let state: PredictionExplanationsState;
 
     beforeEach(() => { state = applyFetchDataSetFulfilled(); });
 
@@ -97,6 +83,13 @@ describe('fetchDataSet action', () => {
 
     it('updates metadata', () => {
       expect(state.metadata).toMatchObject({ columns: ['stuff', 'things'] });
+    });
+  });
+
+  describe('when pending', () => {
+    it('sets the loading marker', () => {
+      const result = reducer(undefined, { type: 'predictions/fetch-dataset/pending' });
+      expect(result.loadingData).toBe(true);
     });
   });
 });
@@ -118,6 +111,13 @@ describe('fetchBreakdown action', () => {
       });
     });
   });
+
+  describe('when pending', () => {
+    it('sets the loading marker', () => {
+      const result = reducer(undefined, { type: 'predictions/fetch-breakdown/pending' });
+      expect(result.loadingBreakdown).toBe(true);
+    });
+  });
 });
 
 describe('fetchPredictionFeatureProfile action', () => {
@@ -135,6 +135,13 @@ describe('fetchPredictionFeatureProfile action', () => {
         data: [],
         layout: {},
       });
+    });
+  });
+
+  describe('when pending', () => {
+    it('sets the loading marker', () => {
+      const result = reducer(undefined, { type: 'predictions/fetch-feature-profile/pending' });
+      expect(result.loadingFeatureProfile).toBe(true);
     });
   });
 });
