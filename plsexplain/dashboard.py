@@ -69,6 +69,28 @@ class Dashboard:
         app = make_server(self)
         uvicorn.run(app, host=host, port=port)
 
+    def model_performance(self):
+        model_index = self.performance.result.index[0]
+
+        if self.performance.model_type == "classification":
+            precision = self.performance.result.loc[model_index, "precision"]
+            recall = self.performance.result.loc[model_index, "recall"]
+            f1_score = self.performance.result.loc[model_index, "f1"]
+            accuracy = self.performance.result.loc[model_index, "accuracy"]
+            auc = self.performance.result.loc[model_index, "auc"]
+
+            return {"precision": precision, "recall": recall, "accuracy": accuracy, "f1": f1_score, "auc": auc}
+        elif self.performance.model_type == "regression":
+            mse = self.performance.result.loc[model_index, "mse"]
+            rmse = self.performance.result.loc[model_index, "rmse"]
+            r2 = self.performance.result.loc[model_index, "r2"]
+            mae = self.performance.result.loc[model_index, "mae"]
+            mad = self.performance.result.loc[model_index, "mad"]
+
+            return {"mse": mse, "rmse": rmse, "r2": r2, "mae": mae, "mad": mad}
+        else:
+            raise ValueError("The model type is not supported.")
+
     def breakdown_prediction(self, x):
         """Returns a breakdown of a prediction
         

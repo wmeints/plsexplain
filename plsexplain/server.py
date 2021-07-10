@@ -22,24 +22,7 @@ def get_model_performance(dashboard):
     """
 
     def get_model_performance_internal():
-        model_index = dashboard.performance.result.index[0]
-
-        if dashboard.performance.model_type == "classification":
-            precision = dashboard.performance.result.loc[model_index, "precision"]
-            recall = dashboard.performance.result.loc[model_index, "recall"]
-            f1_score = dashboard.performance.result.loc[model_index, "f1"]
-            accuracy = dashboard.performance.result.loc[model_index, "accuracy"]
-            auc = dashboard.performance.result.loc[model_index, "auc"]
-
-            return {"precision": precision, "recall": recall, "accuracy": accuracy, "f1": f1_score, "auc": auc}
-        elif dashboard.performance.model_type == "regression":
-            mse = dashboard.performance.result.loc[model_index, "mse"]
-            rmse = dashboard.performance.result.loc[model_index, "rmse"]
-            r2 = dashboard.performance.result.loc[model_index, "r2"]
-            mae = dashboard.performance.result.loc[model_index, "mae"]
-            mad = dashboard.performance.result.loc[model_index, "mad"]
-
-            return {"mse": mse, "rmse": rmse, "r2": r2, "mae": mae, "mad": mad}
+        return dashboard.model_performance()
 
     return get_model_performance_internal
 
