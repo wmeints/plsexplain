@@ -121,6 +121,25 @@ def get_prediction_breakdown(dashboard):
 
     return get_prediction_explanation_internal
 
+def get_prediction_profile(dashboard):
+    """Retrieves the prediction profile for a feature
+
+    Parameters
+    ----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the prediction profile
+    """
+
+    def get_prediction_profile_internal(index, feature):
+        response_data = dashboard.profile_prediction_feature(index, feature)
+        return Response(response_data, media_type="application/json")
+
+    return get_prediction_profile_internal
+
 
 def get_dataset(dashboard):
     """Retrieves the dataset
@@ -206,6 +225,7 @@ def make_server(dashboard):
     app.add_api_route("/api/model/features/{name:str}", get_feature_profile(dashboard), methods=["get"])
     app.add_api_route("/api/dataset", get_dataset(dashboard), methods=["get"])
     app.add_api_route("/api/predictions/{index:int}/breakdown", get_prediction_breakdown(dashboard), methods=["get"])
+    app.add_api_route("/api/predictions/{index}/profile/{feature}", get_prediction_profile(dashboard), methods=["get"])
     app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
 

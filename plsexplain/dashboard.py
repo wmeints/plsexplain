@@ -88,6 +88,24 @@ class Dashboard:
 
         return breakdown_data.to_dict()
 
+    def profile_prediction_feature(self, index, feature):
+        """Returns a profile of a feature in the model for a prediction.
+        
+        Parameters
+        ----------
+        index : int
+            The index of the data sample to profile
+        feature : str
+            The name of the feature to profile
+        
+        Returns
+        -------
+        dict
+            A dictionary containing the profile of the feature
+        """
+        graph_data = self.explainer.predict_profile(self.data['x'].iloc[[index]]).plot(variables=[feature], show=False)
+        return graph_data.to_json()
+
     def _load_dataset(self):
         df = pd.read_csv(self.dataset_file)
         available_columns = [col.lower() for col in df.columns]
