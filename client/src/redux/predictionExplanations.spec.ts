@@ -60,6 +60,11 @@ describe('fetchDataSet action', () => {
       },
       loadingData: false,
       loadingBreakdown: false,
+      loadingFeatureProfile: false,
+      featureSelection: {
+        index: 0,
+        feature: 'PAY_1',
+      },
       metadata: {
         columns: ['stuff', 'things'],
       },

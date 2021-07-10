@@ -32,6 +32,11 @@ interface FetchPredictionFeatureProfilePayload {
   feature: string
 }
 
+interface UpdateFeatureSelectionPayload {
+  index: number | undefined
+  feature: string
+}
+
 export const fetchMetadata = createAsyncThunk<
   MetadataResponse>('metadata/fetch', async () => {
     const data = await api.fetchMetadata();
@@ -86,3 +91,5 @@ export const fetchPredictionFeatureProfile = createAsyncThunk<
     return data;
   },
 );
+
+export const updateFeatureSelection = createAction<UpdateFeatureSelectionPayload>('updateFeatureSelection');

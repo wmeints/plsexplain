@@ -18,6 +18,10 @@ export interface PredictionExplanationsState {
     data: Data
     layout: Layout
   }
+  featureSelection?: {
+    index: number | undefined
+    feature: string
+  }
   loadingData: boolean
   loadingBreakdown: boolean
   loadingFeatureProfile: boolean
@@ -76,6 +80,11 @@ const predictionExplanations = createSlice({
 
     builder.addCase(actions.fetchPredictionFeatureProfile.fulfilled, (state, action) => {
       state.featureProfile = action.payload;
+      state.loadingFeatureProfile = false;
+    });
+
+    builder.addCase(actions.updateFeatureSelection, (state, action) => {
+      state.featureSelection = action.payload;
     });
   },
 });
