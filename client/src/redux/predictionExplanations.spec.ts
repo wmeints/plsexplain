@@ -42,6 +42,20 @@ function applyFetchBreakdownFulfilled() {
   return result;
 }
 
+function applyFetchPredictionFeatureProfileFulfilled() {
+  const action = {
+    type: 'predictions/fetch-feature-profile/fulfilled',
+    payload: {
+      data: [],
+      layout: {},
+    },
+  };
+
+  const result = reducer(undefined, action);
+
+  return result;
+}
+
 test('should return initial state', () => {
   const result = createInitialState();
 
@@ -106,6 +120,25 @@ describe('fetchBreakdown action', () => {
   });
 });
 
+describe('fetchPredictionFeatureProfile action', () => {
+  describe('when fulfilled', () => {
+    let state: PredictionExplanationsState;
+
+    beforeEach(() => { state = applyFetchPredictionFeatureProfileFulfilled(); });
+
+    it('unsets the loading state', () => {
+      expect(state.loadingFeatureProfile).toBe(false);
+    });
+
+    it('updates the feature profile', () => {
+      expect(state.featureProfile).toMatchObject({
+        data: [],
+        layout: {},
+      });
+    });
+  });
+});
+
 describe('updatePredictionSelection', () => {
   it('updates the selection state', () => {
     const state = reducer(undefined, actions.updatePredictionSelection({
@@ -113,5 +146,19 @@ describe('updatePredictionSelection', () => {
     }));
 
     expect(state.selectionState).toMatchObject({ test: true });
+  });
+});
+
+describe('updateFeatureSelection', () => {
+  it('updates the selected row and feature', () => {
+    const state = reducer(undefined, actions.updateFeatureSelection({
+      index: 0,
+      feature: 'PAY_1',
+    }));
+
+    expect(state.featureSelection).toMatchObject({
+      index: 0,
+      feature: 'PAY_1',
+    });
   });
 });
