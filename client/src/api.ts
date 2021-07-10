@@ -103,7 +103,10 @@ export async function fetchPredictionBreakdown(
   return data;
 }
 
-export async function fetchPredictionProfile(index: number, feature: string): Promise<PredictionFeatureProfileResponse> {
+export async function fetchPredictionProfile(
+  index: number,
+  feature: string,
+): Promise<PredictionFeatureProfileResponse> {
   const response = await fetch(`/api/predictions/${index}/profile/${feature}`);
   const data = await response.json();
 
