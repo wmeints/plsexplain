@@ -142,7 +142,7 @@ def get_dataset(dashboard):
         skip = int(skip)
         take = int(take)
         data = dashboard.raw_data
-        page = data.iloc[skip : skip + take, :]
+        page = data.iloc[skip:skip + take, :]
 
         return {
             "data": page.to_dict(orient="records"),
