@@ -14,8 +14,13 @@ export interface PredictionExplanationsState {
     data: Data
     layout: Layout
   }
+  featureProfile?: {
+    data: Data
+    layout: Layout
+  }
   loadingData: boolean
   loadingBreakdown: boolean
+  loadingFeatureProfile: boolean
   metadata: {
     columns: Array<string>
   }
@@ -33,6 +38,7 @@ const initialState: PredictionExplanationsState = {
   data: [],
   loadingData: true,
   loadingBreakdown: false,
+  loadingFeatureProfile: false,
   metadata: {
     columns: [],
   },
@@ -62,6 +68,14 @@ const predictionExplanations = createSlice({
 
     builder.addCase(actions.updatePredictionSelection, (state, action) => {
       state.selectionState = action.payload;
+    });
+
+    builder.addCase(actions.fetchPredictionFeatureProfile.pending, (state) => {
+      state.loadingFeatureProfile = true;
+    });
+
+    builder.addCase(actions.fetchPredictionFeatureProfile.fulfilled, (state, action) => {
+      state.featureProfile = action.payload;
     });
   },
 });

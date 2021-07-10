@@ -7,6 +7,7 @@ import {
   MetadataResponse,
   PerformanceResponse,
   PredictionBreakdownResponse,
+  PredictionFeatureProfileResponse,
 } from '../api';
 
 interface FetchFeatureProfilePayload {
@@ -24,6 +25,11 @@ interface FetchPredictionBreakdownPayload {
 
 interface UpdateSelectionPayload {
   [ key: string]: boolean | number []
+}
+
+interface FetchPredictionFeatureProfilePayload {
+  index: number
+  feature: string
 }
 
 export const fetchMetadata = createAsyncThunk<
@@ -70,3 +76,13 @@ export const fetchPredictionBreakdown = createAsyncThunk<
 );
 
 export const updatePredictionSelection = createAction<UpdateSelectionPayload>('updatePredictionSelection');
+
+export const fetchPredictionFeatureProfile = createAsyncThunk<
+  PredictionFeatureProfileResponse,
+  FetchPredictionFeatureProfilePayload
+>(
+  'predictions/fetch-feature-profile', async (payload) => {
+    const data = await api.fetchPredictionProfile(payload.index, payload.feature);
+    return data;
+  },
+);
