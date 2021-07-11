@@ -11,4 +11,4 @@ cover the following topics:
     :maxdepth: 2
 
     model_explanations
-    limitations
+    prediction_explanations
