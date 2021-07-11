@@ -4,7 +4,8 @@
 Model explanations
 ==================
 
-In this section, we discuss the model predictions. We’ll cover how to interpret the explanations given by the dashboard.
+In this section, we discuss the model explanations. We’ll cover when to use the various explanations offered by the 
+dashboard, and how to interpret the explanations given by the dashboard.
 
 Feature importance
 ------------------
