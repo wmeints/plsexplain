@@ -1,7 +1,10 @@
+"""This module implements the API endpoints for the dashboard."""
+
 from os.path import dirname, abspath, join, isfile
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse, Response
+import json
 
 
 def get_model_performance(dashboard):
@@ -19,24 +22,7 @@ def get_model_performance(dashboard):
     """
 
     def get_model_performance_internal():
-        model_index = dashboard.performance.result.index[0]
-
-        if dashboard.performance.model_type == "classification":
-            precision = dashboard.performance.result.loc[model_index, "precision"]
-            recall = dashboard.performance.result.loc[model_index, "recall"]
-            f1_score = dashboard.performance.result.loc[model_index, "f1"]
-            accuracy = dashboard.performance.result.loc[model_index, "accuracy"]
-            auc = dashboard.performance.result.loc[model_index, "auc"]
-
-            return {"precision": precision, "recall": recall, "accuracy": accuracy, "f1": f1_score, "auc": auc}
-        elif dashboard.performance.model_type == "regression":
-            mse = dashboard.performance.result.loc[model_index, "mse"]
-            rmse = dashboard.performance.result.loc[model_index, "rmse"]
-            r2 = dashboard.performance.result.loc[model_index, "r2"]
-            mae = dashboard.performance.result.loc[model_index, "mae"]
-            mad = dashboard.performance.result.loc[model_index, "mad"]
-
-            return {"mse": mse, "rmse": rmse, "r2": r2, "mae": mae, "mad": mad}
+        return dashboard.model_performance()
 
     return get_model_performance_internal
 
@@ -100,6 +86,73 @@ def get_feature_profile(dashboard):
     return get_feature_profile_internal
 
 
+def get_prediction_breakdown(dashboard):
+    """Retrieves the prediction breakdown
+
+    Parameters:
+    ----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the prediction breakdown
+    """
+
+    def get_prediction_explanation_internal(index):
+        return dashboard.breakdown_prediction(index)
+
+    return get_prediction_explanation_internal
+
+
+def get_prediction_profile(dashboard):
+    """Retrieves the prediction profile for a feature
+
+    Parameters
+    ----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the prediction profile
+    """
+
+    def get_prediction_profile_internal(index, feature):
+        response_data = dashboard.profile_prediction_feature(index, feature)
+        return Response(response_data, media_type="application/json")
+
+    return get_prediction_profile_internal
+
+
+def get_dataset(dashboard):
+    """Retrieves the dataset
+
+    Parameters:
+    -----------
+    dashboard : plsexplain.dashboard.Dashboard
+
+    Returns
+    -------
+    Callable
+        The API handler for the dataset
+    """
+
+    def get_dataset_internal(skip, take):
+        skip = int(skip)
+        take = int(take)
+        data = dashboard.raw_data
+        page = data.iloc[skip:skip + take, :]
+
+        return {
+            "data": page.to_dict(orient="records"),
+            "pager": {"skip": int(skip), "take": int(take), "total": len(data.index)},
+            "metadata": {"columns": data.columns.tolist()},
+        }
+
+    return get_dataset_internal
+
+
 def get_client_app(sub_path):
     """Retrieves content for the client app as long as it's not coming from the static folder.
 
@@ -118,8 +171,15 @@ def get_client_app(sub_path):
 
     asset_path = join(client_folder, sub_path)
 
+    # We don't want to send index.html for static assets, this makes sure we
+    # handle this case correctly.
     if isfile(asset_path):
         return FileResponse(asset_path)
+
+    # We need to make sure that we reply with a 404 for non-existing API endpoints.
+    # Otherwise the API handlers in the client code mess up big time.
+    if sub_path.startswith("api/"):
+        return Response(json.dumps({"message": "Location not found."}), media_type="application/json")
 
     with open(root_file) as doc:
         return doc.read()
@@ -147,6 +207,9 @@ def make_server(dashboard):
     app.add_api_route("/api/performance", get_model_performance(dashboard), methods=["get"])
     app.add_api_route("/api/model/features", get_feature_importance(dashboard), methods=["get"])
     app.add_api_route("/api/model/features/{name:str}", get_feature_profile(dashboard), methods=["get"])
+    app.add_api_route("/api/dataset", get_dataset(dashboard), methods=["get"])
+    app.add_api_route("/api/predictions/{index:int}/breakdown", get_prediction_breakdown(dashboard), methods=["get"])
+    app.add_api_route("/api/predictions/{index}/profile/{feature}", get_prediction_profile(dashboard), methods=["get"])
     app.mount("/images", StaticFiles(directory=asset_folder), name="static")
     app.add_api_route("/{sub_path:path}", get_client_app, methods=["get"], response_class=HTMLResponse)
 

@@ -23,6 +23,7 @@ module.exports = (env, argv) => {
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
     devServer: {
+      historyApiFallback: true,
       compress: true,
       port: 3000,
       proxy: {
@@ -66,6 +67,8 @@ module.exports = (env, argv) => {
       new WebpackCopyPlugin({
         patterns: [
           { from: 'public/images', to: 'images' },
+          { from: 'public/webfonts', to: 'webfonts' },
+          { from: 'public/scripts', to: 'scripts' }
         ],
       }),
       new webpack.HotModuleReplacementPlugin(),

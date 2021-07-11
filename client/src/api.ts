@@ -37,6 +37,28 @@ export interface FeatureProfileResponse {
   layout: Layout
 }
 
+export interface PredictionFeatureProfileResponse {
+  data: Data
+  layout: Layout
+}
+
+export interface DataSetResponse {
+  data: Array<{ [key : string] : string}>,
+  metadata: {
+    columns: Array<string>
+  }
+  pager: {
+    skip: number,
+    take: number,
+    total: number
+  }
+}
+
+export interface PredictionBreakdownResponse {
+  data: Data
+  layout: Layout
+}
+
 export async function fetchMetadata(): Promise<MetadataResponse> {
   const response = await fetch('/api/metadata');
   const data = await response.json();
@@ -60,6 +82,32 @@ export async function fetchFeatureImportance(): Promise<FeatureImportanceRespons
 
 export async function fetchFeatureProfile(name: string): Promise<FeatureProfileResponse> {
   const response = await fetch(`/api/model/features/${name}`);
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchDataSet(skip: number, take: number): Promise<DataSetResponse> {
+  const response = await fetch(`/api/dataset?skip=${skip}&take=${take}`);
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchPredictionBreakdown(
+  index: number,
+): Promise<PredictionBreakdownResponse> {
+  const response = await fetch(`/api/predictions/${index}/breakdown`);
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchPredictionProfile(
+  index: number,
+  feature: string,
+): Promise<PredictionFeatureProfileResponse> {
+  const response = await fetch(`/api/predictions/${index}/profile/${feature}`);
   const data = await response.json();
 
   return data;

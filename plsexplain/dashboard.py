@@ -69,6 +69,65 @@ class Dashboard:
         app = make_server(self)
         uvicorn.run(app, host=host, port=port)
 
+    def model_performance(self):
+        model_index = self.performance.result.index[0]
+
+        if self.performance.model_type == "classification":
+            precision = self.performance.result.loc[model_index, "precision"]
+            recall = self.performance.result.loc[model_index, "recall"]
+            f1_score = self.performance.result.loc[model_index, "f1"]
+            accuracy = self.performance.result.loc[model_index, "accuracy"]
+            auc = self.performance.result.loc[model_index, "auc"]
+
+            return {"precision": precision, "recall": recall, "accuracy": accuracy, "f1": f1_score, "auc": auc}
+        elif self.performance.model_type == "regression":
+            mse = self.performance.result.loc[model_index, "mse"]
+            rmse = self.performance.result.loc[model_index, "rmse"]
+            r2 = self.performance.result.loc[model_index, "r2"]
+            mae = self.performance.result.loc[model_index, "mae"]
+            mad = self.performance.result.loc[model_index, "mad"]
+
+            return {"mse": mse, "rmse": rmse, "r2": r2, "mae": mae, "mad": mad}
+        else:
+            raise ValueError("The model type is not supported.")
+
+    def breakdown_prediction(self, x):
+        """Returns a breakdown of a prediction
+
+        Parameters
+        ----------
+        x : int
+            The index of the data sample to break down
+
+        Returns
+        -------
+        dict
+            A dictionary containing the breakdown of the prediction
+        """
+        breakdown_data = self.explainer.predict_parts(
+            self.data["x"].iloc[[int(x)]], type="break_down_interactions"
+        ).plot(show=False)
+
+        return breakdown_data.to_dict()
+
+    def profile_prediction_feature(self, index, feature):
+        """Returns a profile of a feature in the model for a prediction.
+
+        Parameters
+        ----------
+        index : int
+            The index of the data sample to profile
+        feature : str
+            The name of the feature to profile
+
+        Returns
+        -------
+        dict
+            A dictionary containing the profile of the feature
+        """
+        graph_data = self.explainer.predict_profile(self.data["x"].iloc[[index]]).plot(variables=[feature], show=False)
+        return graph_data.to_json()
+
     def _load_dataset(self):
         df = pd.read_csv(self.dataset_file)
         available_columns = [col.lower() for col in df.columns]
@@ -82,6 +141,9 @@ class Dashboard:
             "x": df.drop(self.output_column, axis=1),
             "y": df[self.output_column],
         }
+
+        self.raw_data = df
+        self.raw_data["key"] = self.raw_data.index
 
     def _load_model(self):
         self.model = joblib.load(self.model_file)

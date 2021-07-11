@@ -3,3 +3,4 @@ coverage/
 dist/
 reports/
 .stryker-tmp/
+kendo-ui-license.txt

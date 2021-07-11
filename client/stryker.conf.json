@@ -9,8 +9,10 @@
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
   "ignorePatterns": [
-    "**/coverage/**/*",
-    "**/__mocks__/**/*",
-    "**/__snapshots__/**/*"
-  ]
+    "**/coverage/**/*"
+  ],
+  "jest": {
+    "projectType": "custom",
+    "configFile": "jest.config.json"
+  }
 }
