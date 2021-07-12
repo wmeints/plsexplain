@@ -165,6 +165,18 @@
 <nav id="bd-toc-nav">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#command-line-interface">
+   Command-line interface
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plsexplain">
+     plsexplain
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#features">
    Features
   </a>
@@ -179,16 +191,9 @@
      Model explanations
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#command-line-interface">
-   Command-line interface
-  </a>
-  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plsexplain">
-     plsexplain
+    <a class="reference internal nav-link" href="#prediction-explanations">
+     Prediction explanations
     </a>
    </li>
   </ul>
@@ -218,25 +223,6 @@
 <span id="id1"></span><h1>Package overview<a class="headerlink" href="#package-overview" title="Permalink to this headline">¶</a></h1>
 <p>In this section we’ll explore the basics of the plsexplain package.
 If you’re looking for a more in-depth explanation we recommend reading the <a class="reference internal" href="../user-guide/index.html#user-guide"><span class="std std-ref">User guide</span></a>.</p>
-<div class="section" id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="performance-metrics">
-<h3>Performance metrics<a class="headerlink" href="#performance-metrics" title="Permalink to this headline">¶</a></h3>
-<p>When you first open the dashboard, you’ll see the overview page with the performance metrics and some model metadata.
-Depending on the type of model you’ll see different metrics on this page.</p>
-<div class="figure align-default">
-<img alt="Model performance metrics" src="../_images/dashboard-00.png" />
-</div>
-</div>
-<div class="section" id="model-explanations">
-<h3>Model explanations<a class="headerlink" href="#model-explanations" title="Permalink to this headline">¶</a></h3>
-<p>The tool can be used to generate model explanations. You can view the model explanations when you navigate to the
-model navbar item at the top of the screen. You’ll get a screen that looks similar to the sample below:</p>
-<div class="figure align-default">
-<img alt="Model explanations section on the dashboard" src="../_images/dashboard-01.png" />
-</div>
-</div>
-</div>
 <div class="section" id="command-line-interface">
 <h2>Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="plsexplain">
@@ -280,6 +266,33 @@ the number of samples in the dataset below 500.</p>
 <dd><p>Required argument</p>
 </dd></dl>
 
+</div>
+</div>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="performance-metrics">
+<h3>Performance metrics<a class="headerlink" href="#performance-metrics" title="Permalink to this headline">¶</a></h3>
+<p>When you first open the dashboard, you’ll see the overview page with the performance metrics and some model metadata.
+Depending on the type of model you’ll see different metrics on this page.</p>
+<div class="figure align-default">
+<img alt="Model performance metrics" src="../_images/dashboard-00.png" />
+</div>
+</div>
+<div class="section" id="model-explanations">
+<h3>Model explanations<a class="headerlink" href="#model-explanations" title="Permalink to this headline">¶</a></h3>
+<p>The tool can be used to generate model explanations. You can view the model explanations when you navigate to the
+model navbar item at the top of the screen. You’ll get a screen that looks similar to the sample below:</p>
+<div class="figure align-default">
+<img alt="Model explanations section on the dashboard" src="../_images/dashboard-01.png" />
+</div>
+</div>
+<div class="section" id="prediction-explanations">
+<h3>Prediction explanations<a class="headerlink" href="#prediction-explanations" title="Permalink to this headline">¶</a></h3>
+<p>The tool can also be used to generate prediction explanations. You can view the prediction explanations when you select
+the <em>Predictions</em> item in the navigation bar. You’ll see a screen similar to the sample below:</p>
+<div class="figure align-default">
+<img alt="Prediction explanations section on the dashboard" src="../_images/dashboard-02.png" />
+</div>
 </div>
 </div>
 </div>

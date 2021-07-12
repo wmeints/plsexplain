@@ -33,7 +33,7 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Limitations" href="limitations.html" />
+    <link rel="next" title="Prediction Explanations" href="prediction_explanations.html" />
     <link rel="prev" title="User guide" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -128,8 +128,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="limitations.html">
-   Limitations
+  <a class="reference internal" href="prediction_explanations.html">
+   Prediction Explanations
   </a>
  </li>
 </ul>
@@ -153,14 +153,38 @@
 <nav id="bd-toc-nav">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#permutation-feature-importance">
-   Permutation Feature Importance
+  <a class="reference internal nav-link" href="#feature-importance">
+   Feature importance
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-you-should-use-the-feature-importance">
+     When you should use the feature importance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-interpret-the-feature-importance-plot">
+     How to interpret the feature importance plot
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#accumulated-local-effects">
-   Accumulated Local Effects
+  <a class="reference internal nav-link" href="#feature-profiles">
+   Feature profiles
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-you-should-use-the-feature-profile">
+     When you should use the feature profile
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-interpret-the-feature-profiles">
+     How to interpret the feature profiles
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -185,20 +209,64 @@
                 
   <div class="section" id="model-explanations">
 <span id="id1"></span><h1>Model explanations<a class="headerlink" href="#model-explanations" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="permutation-feature-importance">
-<h2><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/feature-importance.html">Permutation Feature Importance</a><a class="headerlink" href="#permutation-feature-importance" title="Permalink to this headline">¶</a></h2>
-<p>This technique allows the tool to visualize the impact on the performance of a
-model when you permutate the values of a single feature. The performance impact is measured by using a suitable
-performance metric.</p>
-<p>In the case of a classification model we’ll use the accuracy metric. In the future you can specify the metric as an
-option on the command-line.</p>
-<p>For regression models the <a class="reference external" href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">RMSE metric</a> is used. This metric too can’t be changed at this moment.</p>
+<p>In this section, we discuss the model explanations. We’ll cover when to use the various explanations offered by the
+dashboard, and how to interpret the explanations given by the dashboard.</p>
+<div class="section" id="feature-importance">
+<h2>Feature importance<a class="headerlink" href="#feature-importance" title="Permalink to this headline">¶</a></h2>
+<p>The first explanation given by the dashboard is about feature importance. The feature importance plot tells you which
+features have the most impact on the performance of the model.</p>
+<div class="section" id="when-you-should-use-the-feature-importance">
+<h3>When you should use the feature importance<a class="headerlink" href="#when-you-should-use-the-feature-importance" title="Permalink to this headline">¶</a></h3>
+<p>The feature importance plot can be helpful when trying to fix a model that is overfitting, especially if you have a
+model that has many features and therefore has a high chance to overfit. The feature importance plot helps you in this
+scenario to decide which features to keep and which features to drop.</p>
 </div>
-<div class="section" id="accumulated-local-effects">
-<h2><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/ale.html">Accumulated Local Effects</a><a class="headerlink" href="#accumulated-local-effects" title="Permalink to this headline">¶</a></h2>
-<p>When you select a feature in the dashboard, it will automatically plot the Accumulated Local Effects for the selected
-feature. This plot tells you more about the impact on the outcome of a model based on the change of value for the
-selected feature.</p>
+<div class="section" id="how-to-interpret-the-feature-importance-plot">
+<h3>How to interpret the feature importance plot<a class="headerlink" href="#how-to-interpret-the-feature-importance-plot" title="Permalink to this headline">¶</a></h3>
+<p>Let’s take a look at an example feature importance plot to understand how to interpret it. The sample below shows a version of the plot:</p>
+<div class="figure align-default">
+<img alt="../_images/feature-importance.png" src="../_images/feature-importance.png" />
+</div>
+<p>The plot shows bars for each of the features and their impact on the performance of the model. Each bar shows the
+difference in performance when that feature is changed.</p>
+<p>To better understand the values shown in the plot, we’ll have to look at the algorithm used to develop the values in
+the plot.</p>
+<p>We perform the following steps to calculate the feature importance:</p>
+<ol class="arabic simple">
+<li><p>First, a metric is chosen and calculated to determine the performance of the model. We calculate accuracy for
+classification models. For regression models, we calculate the mean squared error rate.</p></li>
+<li><p>Then, one-by-one the features are permutated, and we calculate the performance metric again.</p></li>
+<li><p>Finally, we calculate the difference between the new performance metric and the original one we calculated in the
+first step is the feature importance.</p></li>
+</ol>
+<p>You can learn more about the algorithm in this section of the interpretable machine-learning book:
+<a class="reference external" href="https://christophm.github.io/interpretable-ml-book/feature-importance.html">Permutation Feature Importance</a></p>
+</div>
+</div>
+<div class="section" id="feature-profiles">
+<h2>Feature profiles<a class="headerlink" href="#feature-profiles" title="Permalink to this headline">¶</a></h2>
+<p>Alongside the feature importance, there’s a section called feature profiles on the model explanation section of the
+dashboard. This section shows the profiling information for a feature. To see a feature profile, you have to select a
+feature profile from the feature importance plot.</p>
+<p>We’ve based the feature profiles on the <a class="reference external" href="https://christophm.github.io/interpretable-ml-book/ale.html">Accumulated Local Effects</a> algorithm. This algorithm calculates the average
+effect of feature values on the outcome of the model.</p>
+<div class="section" id="when-you-should-use-the-feature-profile">
+<h3>When you should use the feature profile<a class="headerlink" href="#when-you-should-use-the-feature-profile" title="Permalink to this headline">¶</a></h3>
+<p>The feature profile can tell you at what value for a given feature it’s likely that a model produces a different
+outcome. The feature profile plot can help you spot counter-intuitive behavior (For example, if you’re building a
+model that predicts the likelihood of a cardiac event and it decreases as patients get older) in your model.</p>
+</div>
+<div class="section" id="how-to-interpret-the-feature-profiles">
+<h3>How to interpret the feature profiles<a class="headerlink" href="#how-to-interpret-the-feature-profiles" title="Permalink to this headline">¶</a></h3>
+<p>The feature profile plot is quite intuitive to use. On the horizontal axis, we’ll plot the value for the feature, while
+on the vertical axis, we plot the model’s outcome. The line plots the changes in outcome based on the value for the
+feature.</p>
+<div class="figure align-default">
+<img alt="../_images/ale-plot.png" src="../_images/ale-plot.png" />
+</div>
+<p>Please note, the chart shows the average effect on the outcome of the model. If you want to validate individual samples,
+we recommend taking a look at the prediction explanations section.</p>
+</div>
 </div>
 </div>
 
@@ -209,7 +277,7 @@ selected feature.</p>
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="index.html" title="previous page">User guide</a>
-    <a class='right-next' id="next-link" href="limitations.html" title="next page">Limitations</a>
+    <a class='right-next' id="next-link" href="prediction_explanations.html" title="next page">Prediction Explanations</a>
 
               </div>
               
