@@ -42,10 +42,6 @@ const modelExplanations = createSlice({
       state.loadingFeatureImportance = false;
     });
 
-    builder.addCase(actions.fetchFeatureImportance.pending, (state) => {
-      state.loadingFeatureImportance = true;
-    });
-
     builder.addCase(actions.fetchFeatureProfile.pending, (state) => {
       state.loadingFeatureProfile = true;
     });
