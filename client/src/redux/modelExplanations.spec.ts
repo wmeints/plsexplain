@@ -14,7 +14,7 @@ test('should have an initial state', () => {
 });
 
 describe('fetchFeatureImportance', () => {
-  describe('when fetching feature importance', () => {
+  describe('when fulfilled', () => {
     it('should return the correct state', () => {
       const state = reducer(undefined, { type: 'feature-importance/fetch/fulfilled', payload: { data: [], layout: {} } });
       expect(state.featureImportance).toMatchObject({ data: [], layout: {} });
@@ -28,7 +28,7 @@ describe('fetchFeatureImportance', () => {
 });
 
 describe('fetchFeatureProfile', () => {
-  describe('when fetching feature profile', () => {
+  describe('when fulfilled', () => {
     it('should return the correct state', () => {
       const state = reducer(undefined, { type: 'feature-profile/fetch/fulfilled', payload: { data: [], layout: {} } });
       expect(state.featureProfile).toMatchObject({ data: [], layout: {} });
@@ -40,7 +40,7 @@ describe('fetchFeatureProfile', () => {
     });
   });
 
-  describe('when fetching feature profile is pending', () => {
+  describe('when pending', () => {
     it('should set the loading state', () => {
       const state = reducer(undefined, { type: 'feature-profile/fetch/pending' });
       expect(state.loadingFeatureProfile).toBe(true);
