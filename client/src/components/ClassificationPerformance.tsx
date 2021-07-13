@@ -27,23 +27,23 @@ const ClassificationPerformance = (props: ClassificationPerformanceProps): React
         <div className="row">
           <div className="col">
             <div className="card-text"><abbr title="Precision">Precision</abbr></div>
-            <p className="h3">{precision.toFixed(2)}</p>
+            <p className="h3" data-test="precision">{precision.toFixed(2)}</p>
           </div>
           <div className="col">
             <div className="card-text"><abbr title="Recall">Recall</abbr></div>
-            <p className="h3">{recall.toFixed(2)}</p>
+            <p className="h3" data-test="recall">{recall.toFixed(2)}</p>
           </div>
           <div className="col">
             <div className="card-text"><abbr title="Accuracy">Accuracy</abbr></div>
-            <p className="h3">{accuracy.toFixed(2)}</p>
+            <p className="h3" data-test="accuracy">{accuracy.toFixed(2)}</p>
           </div>
           <div className="col">
             <div className="card-text"><abbr title="F1-Score">F1-Score</abbr></div>
-            <p className="h3">{f1.toFixed(2)}</p>
+            <p className="h3" data-test="f1">{f1.toFixed(2)}</p>
           </div>
           <div className="col">
             <div className="card-text"><abbr title="Area Under The Curve">AUC</abbr></div>
-            <p className="h3">{auc.toFixed(2)}</p>
+            <p className="h3" data-test="auc">{auc.toFixed(2)}</p>
           </div>
         </div>
       </div>
