@@ -1,8 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { BrowserRouter as Router } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
 
 test('renders correctly', () => {
-  const component = shallow(<NavigationBar />);
+  const component = mount(
+    <Router>
+      <NavigationBar />
+    </Router>,
+  );
   expect(component).toMatchSnapshot();
 });

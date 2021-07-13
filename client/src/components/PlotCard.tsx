@@ -3,8 +3,8 @@ import { Data, Layout } from 'plotly.js';
 import Plot from './Plot';
 
 interface PlotCardProps {
-  data: Data
-  layout: Layout
+  data: Data | undefined
+  layout: Layout | undefined
 }
 
 const PlotCard: React.FC<PlotCardProps> = (props: PlotCardProps) => {

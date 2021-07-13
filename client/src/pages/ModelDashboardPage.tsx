@@ -4,7 +4,7 @@ import { State } from '../redux/store';
 import * as actions from '../redux/actions';
 import FeatureImportance from '../components/FeatureImportance';
 import LoadingIndicator from '../components/LoadingIndicator';
-import FeatureProfile from '../components/FeatureProfile';
+import InteractivePlotCard from '../components/InteractivePlotCard';
 
 const ModelDashboardPage = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -41,10 +41,15 @@ const ModelDashboardPage = (): React.ReactElement => {
               onFeatureSelected={(feature) => loadFeatureProfile(feature)}
             />
           )}
-          {loadingFeatureProfile && <LoadingIndicator text="Loading feature profile..." />}
-          {!loadingFeatureProfile && featureProfile && (
-            <FeatureProfile data={featureProfile.data} layout={featureProfile.layout} />
-          )}
+          <h2 className="h4 mt-4 mb-4">
+            Feature profile
+          </h2>
+          <InteractivePlotCard
+            plot={featureProfile}
+            loadingText="Loading feature profile..."
+            missingDataText="Please select a feature from the feature importance plot to see its profile."
+            loading={loadingFeatureProfile}
+          />
         </div>
       </div>
     </div>

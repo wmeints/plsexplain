@@ -5,8 +5,8 @@ import LoadingIndicator from './LoadingIndicator';
 
 interface InteractivePlotCardProps {
   plot?: {
-    data: Data
-    layout: Layout
+    data?: Data | undefined
+    layout?: Layout | undefined
   }
   loading: boolean
   loadingText: string
@@ -27,7 +27,7 @@ const InteractivePlotCard: FC<InteractivePlotCardProps> = (props) => {
       {!loading && !plot && <p className="text-muted">{missingDataText}</p>}
       {!loading && plot && (
         <>
-          <PlotCard data={plot.data} layout={plot.layout} />
+          <PlotCard data={plot?.data} layout={plot?.layout} />
         </>
       )}
     </>
