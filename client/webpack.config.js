@@ -54,6 +54,10 @@ module.exports = (env, argv) => {
           test: /.tsx?$/,
           use: 'babel-loader',
         },
+        {
+          test: /.json$/,
+          use: 'json-loader',
+        },
       ],
     },
     plugins: [

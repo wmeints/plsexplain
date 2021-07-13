@@ -1,9 +1,6 @@
 import React from 'react';
-import Plotly from 'plotly.js-dist';
-import createPlotlyComponent from 'react-plotly.js/factory';
 import { Data, Layout } from 'plotly.js';
-
-const Plot = createPlotlyComponent(Plotly);
+import Plot from './Plot';
 
 // eslint-disable-next-line no-unused-vars
 type OnFeatureSelected = (name: string) => void;
@@ -17,19 +14,12 @@ interface FeatureImportanceProps {
 type FeatureImportanceComponent = React.FC<
   FeatureImportanceProps & React.HTMLAttributes<HTMLDivElement>>;
 
-const FeatureImportance: FeatureImportanceComponent = (props) => {
-  const {
-    data,
-    layout,
-    onFeatureSelected,
-    className,
-  } = props;
-
-  // HACK: This really nasty trick makes data retrieved from the redux store
-  // mutable so we can use it with plotly. This will be fixed in a future version of plotly :-)
-  const graphData = JSON.parse(JSON.stringify(data));
-  const graphLayout = JSON.parse(JSON.stringify(layout));
-
+const FeatureImportance: FeatureImportanceComponent = ({
+  data,
+  layout,
+  className,
+  onFeatureSelected = undefined,
+}) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const selectFeature = (evt: any) => {
     const dataLabel = evt.points[0].label;
@@ -42,19 +32,13 @@ const FeatureImportance: FeatureImportanceComponent = (props) => {
     <div className={`card shadow-sm ${className}`}>
       <div className="card-body">
         <Plot
-          data={graphData}
-          layout={graphLayout}
-          useResizeHandler
-          style={{ width: '100%' }}
+          data={data}
+          layout={layout}
           onClick={(evt) => selectFeature(evt)}
         />
       </div>
     </div>
   );
-};
-
-FeatureImportance.defaultProps = {
-  onFeatureSelected: undefined,
 };
 
 export default FeatureImportance;
