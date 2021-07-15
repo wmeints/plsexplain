@@ -2,9 +2,9 @@
 
 # These files need to have linux line-endings due to tools
 # or the context in which they are used.
-*.sh    eol=lf
-*.ts    eol=lf
-*.tsx   eol=lf
+*.sh    text eol=lf
+*.ts    text eol=lf
+*.tsx   text eol=lf
 
 *.png   binary
 *.ico   binary
