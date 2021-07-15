@@ -81,6 +81,15 @@ const PredictionDashboardPage = (): ReactElement => {
     dispatch(actions.fetchDataSet({ skip: 0, take: 20 }));
   }, []);
 
+  const columns = metadata.columns.map((column) => (
+    <GridColumn
+      key={column}
+      width="120px"
+      field={column}
+      title={column}
+    />
+  ));
+
   return (
     <>
       {loadingData && (
@@ -124,7 +133,7 @@ const PredictionDashboardPage = (): ReactElement => {
                   selectedField="selected"
                   resizable
                 >
-                  {metadata.columns.map((column) => <GridColumn key={column} width="120px" field={column} title={column} />)}
+                  {columns}
                 </Grid>
               </div>
             </div>
