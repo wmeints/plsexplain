@@ -12,7 +12,9 @@ LoadedCheerio {
     "name": "div",
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": Node {
-      "attribs": Object {},
+      "attribs": Object {
+        "data-test": "loadingText",
+      },
       "children": Array [
         Node {
           "data": "test",
@@ -38,14 +40,20 @@ LoadedCheerio {
       },
       "prev": [Circular],
       "type": "tag",
-      "x-attribsNamespace": Object {},
-      "x-attribsPrefix": Object {},
+      "x-attribsNamespace": Object {
+        "data-test": undefined,
+      },
+      "x-attribsPrefix": Object {
+        "data-test": undefined,
+      },
     },
     "parent": Node {
       "children": Array [
         [Circular],
         Node {
-          "attribs": Object {},
+          "attribs": Object {
+            "data-test": "loadingText",
+          },
           "children": Array [
             Node {
               "data": "test",
@@ -61,8 +69,12 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": [Circular],
           "type": "tag",
-          "x-attribsNamespace": Object {},
-          "x-attribsPrefix": Object {},
+          "x-attribsNamespace": Object {
+            "data-test": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "data-test": undefined,
+          },
         },
       ],
       "name": "root",
@@ -85,7 +97,9 @@ LoadedCheerio {
     },
   },
   "1": Node {
-    "attribs": Object {},
+    "attribs": Object {
+      "data-test": "loadingText",
+    },
     "children": Array [
       Node {
         "data": "test",
@@ -167,8 +181,12 @@ LoadedCheerio {
       },
     },
     "type": "tag",
-    "x-attribsNamespace": Object {},
-    "x-attribsPrefix": Object {},
+    "x-attribsNamespace": Object {
+      "data-test": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "data-test": undefined,
+    },
   },
   "_root": LoadedCheerio {
     "0": Node {
