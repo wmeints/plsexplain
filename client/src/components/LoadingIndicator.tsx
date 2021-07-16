@@ -9,7 +9,7 @@ const LoadingIndicator = (props: LoadingIndicatorProps): ReactElement => {
   return (
     <>
       <div className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true" />
-      <span>{text}</span>
+      <span data-test="loadingText">{text}</span>
     </>
   );
 };

@@ -1,0 +1,218 @@
+{
+    "data": [
+        {
+            "base": 0.23037900793650795,
+            "connector": {
+                "line": {
+                    "color": "#371ea3",
+                    "dash": "solid",
+                    "width": 1
+                },
+                "mode": "spanning"
+            },
+            "decreasing": {
+                "marker": {
+                    "color": "#f05a71"
+                }
+            },
+            "hoverinfo": "text+delta",
+            "hoverlabel": {
+                "bgcolor": "rgba(0,0,0,0.8)"
+            },
+            "hovertext": [
+                "Average response: 0.23<br>Prediction: 0.05",
+                "PAY_1 = 0.0<br>decreases average response by",
+                "LIMIT_BAL = 200000.0<br>decreases average response by",
+                "PAY_AMT5 = 0.0<br>increases average response by",
+                "PAY_AMT1 = 2000.0<br>increases average response by",
+                "BILL_AMT2 = 22060.0<br>decreases average response by",
+                "PAY_AMT6 = 0.0<br>increases average response by",
+                "BILL_AMT1 = 21460.0<br>decreases average response by",
+                "BILL_AMT3 = 23380.0<br>decreases average response by",
+                "BILL_AMT4 = 21520.0<br>increases average response by",
+                "PAY_AMT4:BILL_AMT5 = 4280.0:8815.0<br>decreases average response by",
+                "+ all other factors<br>decreases average response by",
+                "Average response: 0.23<br>Prediction: 0.05"
+            ],
+            "increasing": {
+                "marker": {
+                    "color": "#8bdcbe"
+                }
+            },
+            "measure": [
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "relative",
+                "total"
+            ],
+            "orientation": "h",
+            "showlegend": false,
+            "text": [
+                "0.23",
+                "-0.03",
+                "-0.021",
+                "+0.024",
+                "+0.013",
+                "-0.003",
+                "+0.007",
+                "-0.039",
+                "-0.004",
+                "+0.008",
+                "-0.008",
+                "-0.128",
+                "0.05"
+            ],
+            "textposition": "outside",
+            "totals": {
+                "marker": {
+                    "color": "#371ea3"
+                }
+            },
+            "x": [
+                0.0,
+                -0.03,
+                -0.021,
+                0.024,
+                0.013,
+                -0.003,
+                0.007,
+                -0.039,
+                -0.004,
+                0.008,
+                -0.008,
+                -0.128,
+                -0.18
+            ],
+            "y": [
+                "intercept",
+                "PAY_1 = 0.0",
+                "LIMIT_BAL = 200000.0",
+                "PAY_AMT5 = 0.0",
+                "PAY_AMT1 = 2000.0",
+                "BILL_AMT2 = 22060.0",
+                "PAY_AMT6 = 0.0",
+                "BILL_AMT1 = 21460.0",
+                "BILL_AMT3 = 23380.0",
+                "BILL_AMT4 = 21520.0",
+                "PAY_AMT4:BILL_AMT5 = 4280.0:8815.0",
+                "+ all other factors",
+                "prediction"
+            ],
+            "type": "waterfall",
+            "xaxis": "x",
+            "yaxis": "y"
+        }
+    ],
+    "layout": {
+        "template": {
+            "data": {
+                "scatter": [
+                    {
+                        "type": "scatter"
+                    }
+                ]
+            }
+        },
+        "xaxis": {
+            "anchor": "y",
+            "domain": [
+                0.0,
+                1.0
+            ],
+            "type": "linear",
+            "gridwidth": 2,
+            "zeroline": false,
+            "automargin": true,
+            "ticks": "outside",
+            "tickcolor": "white",
+            "ticklen": 3,
+            "fixedrange": true,
+            "range": [
+                0.023000000000000003,
+                0.257
+            ]
+        },
+        "yaxis": {
+            "anchor": "x",
+            "domain": [
+                0.0,
+                1.0
+            ],
+            "type": "category",
+            "autorange": "reversed",
+            "gridwidth": 2,
+            "automargin": true,
+            "ticks": "outside",
+            "tickcolor": "white",
+            "ticklen": 10,
+            "fixedrange": true
+        },
+        "annotations": [
+            {
+                "font": {
+                    "size": 16
+                },
+                "showarrow": false,
+                "text": "RandomForestClassifier",
+                "x": 0.5,
+                "xanchor": "center",
+                "xref": "paper",
+                "y": 1.0,
+                "yanchor": "bottom",
+                "yref": "paper"
+            },
+            {
+                "font": {
+                    "size": 16
+                },
+                "showarrow": false,
+                "text": "contribution",
+                "x": 0.5,
+                "xanchor": "center",
+                "xref": "paper",
+                "y": 0,
+                "yanchor": "top",
+                "yref": "paper",
+                "yshift": -30
+            }
+        ],
+        "shapes": [
+            {
+                "line": {
+                    "color": "#371ea3",
+                    "dash": "dot",
+                    "width": 1.5
+                },
+                "type": "line",
+                "x0": 0.23037900793650795,
+                "x1": 0.23037900793650795,
+                "xref": "x",
+                "y0": -1,
+                "y1": 13,
+                "yref": "y"
+            }
+        ],
+        "title": {
+            "text": "Break Down",
+            "x": 0.15
+        },
+        "font": {
+            "color": "#371ea3"
+        },
+        "margin": {
+            "t": 78,
+            "b": 71,
+            "r": 30
+        },
+        "height": 413.0
+    }
+}

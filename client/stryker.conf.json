@@ -6,6 +6,10 @@
     "clear-text",
     "progress"
   ],
+  "mutate": [
+    "src/**/*.ts?(x)",
+    "!src/**/*@(.test|.spec|Spec).ts?(x)"
+  ],
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
   "ignorePatterns": [

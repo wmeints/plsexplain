@@ -55,14 +55,6 @@ const metadata = createSlice({
       state.performance = action.payload as PerformanceState;
       state.performanceDataLoading = false;
     });
-
-    builder.addCase(actions.fetchMetadata.pending, (state) => {
-      state.metadataLoading = true;
-    });
-
-    builder.addCase(actions.fetchModelPerformance.pending, (state) => {
-      state.performanceDataLoading = true;
-    });
   },
 });
 

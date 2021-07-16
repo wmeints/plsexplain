@@ -42,8 +42,12 @@ const OverviewPage = (): React.ReactElement => {
       </div>
       <div className="row">
         <div className="col">
-          {modelType === 'classification' && !isLoading && <ClassificationPerformance data={performance as ClassificationPerformanceState} />}
-          {modelType === 'regression' && !isLoading && <RegressionPerformance data={performance as RegressionPerformanceState} />}
+          {modelType === 'classification' && !isLoading && (
+            <ClassificationPerformance data={performance as ClassificationPerformanceState} />
+          )}
+          {modelType === 'regression' && !isLoading && (
+            <RegressionPerformance data={performance as RegressionPerformanceState} />
+          )}
         </div>
       </div>
     </div>

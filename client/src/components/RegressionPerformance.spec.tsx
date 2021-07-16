@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
 import RegressionPerformance from './RegressionPerformance';
 
 test('renders correctly', () => {
@@ -11,6 +11,6 @@ test('renders correctly', () => {
     mae: 0.48,
   };
 
-  const component = shallow(<RegressionPerformance data={data} />);
+  const component = render(<RegressionPerformance data={data} />);
   expect(component).toMatchSnapshot();
 });
