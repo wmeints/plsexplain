@@ -10,7 +10,6 @@
     "src/**/*.ts?(x)",
     "!src/**/*@(.test|.spec|Spec).ts?(x)"
   ],
-  "mutator": "typescript",
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
   "ignorePatterns": [
