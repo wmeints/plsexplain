@@ -16,12 +16,14 @@ test('should have an initial state', () => {
 describe('fetchFeatureImportance', () => {
   describe('when fulfilled', () => {
     it('should return the correct state', () => {
-      const state = reducer(undefined, { type: 'feature-importance/fetch/fulfilled', payload: { data: [], layout: {} } });
+      const action = { type: 'feature-importance/fetch/fulfilled', payload: { data: [], layout: {} } };
+      const state = reducer(undefined, action);
       expect(state.featureImportance).toMatchObject({ data: [], layout: {} });
     });
 
     it('should unset the loading state', () => {
-      const state = reducer(undefined, { type: 'feature-importance/fetch/fulfilled', payload: { data: [], layout: {} } });
+      const action = { type: 'feature-importance/fetch/fulfilled', payload: { data: [], layout: {} } };
+      const state = reducer(undefined, action);
       expect(state.loadingFeatureImportance).toBe(false);
     });
   });

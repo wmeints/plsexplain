@@ -29,7 +29,7 @@ test('handles feature selection', () => {
   // eslint-disable-next-line no-unused-vars
   const clickHandler: ((arg: any) => void) | undefined = component.find(Plot).prop('onClick');
 
-  clickHandler!({ points: [{ label: 'PAY_1' }] });
+  if (clickHandler) clickHandler({ points: [{ label: 'PAY_1' }] });
 
   expect(selectionHandler).toHaveBeenCalledWith('PAY_1');
 });
@@ -45,7 +45,7 @@ test('forces handler to be non-null', () => {
   // eslint-disable-next-line no-unused-vars
   const clickHandler: ((arg: any) => void) | undefined = component.find(Plot).prop('onClick');
 
-  clickHandler!({ points: [{ label: 'PAY_1' }] });
+  if (clickHandler) clickHandler({ points: [{ label: 'PAY_1' }] });
 
   expect(selectionHandler).not.toHaveBeenCalled();
 });
