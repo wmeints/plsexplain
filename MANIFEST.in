@@ -1,0 +1,10 @@
+include setup.py
+include pyproject.toml
+
+# Assets for the package description
+include LICENSE
+include README.md
+include assets/dashboard-01.png
+
+# Web assets for the dashboard
+recursive-include client/dist *
