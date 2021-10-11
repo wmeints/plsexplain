@@ -1,52 +1,26 @@
-[tool.poetry]
+[project]
 name = "plsexplain"
-version = "0.2.0"
-description = "Create an explainable AI dashboard for your machine learning model."
-authors = ["Willem Meints <willem.meints@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-homepage = "https://wmeints.github.io/plsexplain"
-repository = "https://github.com/wmeints/plsexplain"
 
-include = [
-    "client/dist/**/*",
-    "assets/dashboard-01.png"
+authors = [
+    { name = "Willem Meints", email = "willem.meints@gmail.com" }
 ]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-click = "^8.0.1"
-dalex = "^1.2.0"
-tqdm = "^4.61.1"
-progressbar2 = "^3.53.1"
-uvicorn = {extras = ["standard"], version = "^0.14.0"}
-fastapi = "^0.65.2"
-aiofiles = "^0.7.0"
-joblib = "^1.0.1"
-scikit-learn = "^0.24.2"
-pandas = "^1.2.5"
+readme = "README.md"
+requires-python = ">=3.9"
+dynamic = ["version", "description"]
+license = { file = "LICENSE" }
+dependencies = [
+    "uvicorn >= 0.15",
+    "dalex >= 1.4",
+    "fastapi >= 0.68",
+    "pandas >= 1.0.0",
+    "scikit-learn >= 0.24"
+]
 
-[tool.poetry.dev-dependencies]
-Sphinx = "^4.0.2"
-pytest = "^6.2.4"
-black = {version = "^21.6b0", allow-prereleases = true}
-flake8 = "^3.9.2"
-sphinx-reload = "^0.2.0"
-pydata-sphinx-theme = "^0.6.3"
-sphinx-click = "^3.0.1"
-pytest-cov = "^2.12.1"
-
-[tool.poetry.scripts]
-plsexplain = "plsexplain.cli:main"
+[project.urls]
+Source = "https://github.com/wmeints/plsexplain"
+Homepage = "https://wmeints.github.io/plsexplain"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.black]
-line-length = 120
-
-[tool.poetry-dynamic-versioning]
-enable = true
-vcs = "git"
-style = "semver"
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"

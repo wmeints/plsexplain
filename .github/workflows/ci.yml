@@ -5,10 +5,11 @@ on:
   pull_request:
     branches:
       - main
+      - dev
 
 name: continuous-integration
 jobs:
-  check-style:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,93 +19,23 @@ jobs:
         with:
           node-version: '14'
       - uses: actions/setup-python@v1
-        name: Setup python 3.8
+        name: Setup python 3.9
         with: 
-          python-version: "3.8"
-      - uses: Gr1N/setup-poetry@v4
-        name: Setup poetry tooling
+          python-version: "3.9"
+      - name: Install build tools
+        run: pip install build pytest flake8
       - run: npm install
         working-directory: client
         name: Install frontend dependencies
-      - run: poetry install
-        name: Install server dependencies
-      - run: npm run lint
-        name: Check typescript styles
-        working-directory: client
-      - run: poetry run flake8 plsexplain
-        name: Check sources for server
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        name: Checkout sources
-      - uses: actions/setup-node@v2
-        name: Setup node 14
-        with:
-          node-version: '14'
-      - uses: actions/setup-python@v1
-        name: Setup python 3.8
-        with: 
-          python-version: "3.8"
-      - uses: Gr1N/setup-poetry@v4
-        name: Setup poetry tooling
-      - run: npm install
-        working-directory: client
-        name: Install frontend dependencies
-      - run: poetry install
-        name: Install server dependencies
       - run: npm test
         working-directory: client
         name: Run client unit-tests
-      - run: poetry run pytest
+      - run: python -m build --no-isolation .
+        name: Build package
+      - run: python -m pytest
         name: Run server unit-tests
-  package:
-    runs-on: ubuntu-latest
-    needs:
-      - test
-      - check-style
-    steps:
-      - uses: actions/checkout@v2
-        name: Checkout sources
-      - uses: actions/setup-node@v2
-        name: Setup node 14
-        with:
-          node-version: '14'
-      - uses: actions/setup-python@v1
-        name: Setup python 3.8
-        with: 
-          python-version: "3.8"
-      - uses: Gr1N/setup-poetry@v4
-        name: Setup poetry tooling
-      - run: npm install
-        working-directory: client
-        name: Install frontend dependencies
-      - run: poetry install
-        name: Install server dependencies
-      - name: Activate Kendo UI License
-        run: npx kendo-ui-license activate
-        working-directory: client
-        env:
-          KENDO_UI_LICENSE: ${{ secrets.KENDO_UI_LICENSE }}
-      - run: npm run build
-        name: Build frontend assets
-        working-directory: client
-      - run: poetry build
-        name: Package application
-  docs:
-    runs-on: ubuntu-latest
-    needs: package
-    steps:
-      - uses: actions/checkout@v2
-        name: Checkout sources
-      - name: Setup python 3.8
-        uses: actions/setup-python@v1
-        with: 
-          python-version: "3.8"
-      - name: Setup poetry tooling
-        uses: Gr1N/setup-poetry@v4
-      - name: Install packages
-        run: poetry install
+      - run: flake8 plsexplain
+        name: Check Python code style
       - name: Build documentation
         run: make html
         working-directory: docs
