@@ -30,7 +30,7 @@ jobs:
       - run: npm test
         working-directory: client
         name: Run client unit-tests
-      - run: python -m build .
+      - run: python -m build --no-isolation .
         name: Build package
       - run: python -m pytest
         name: Run server unit-tests
