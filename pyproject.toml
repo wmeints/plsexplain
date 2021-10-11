@@ -12,7 +12,9 @@ license = { file = "LICENSE" }
 dependencies = [
     "uvicorn >= 0.15",
     "dalex >= 1.4",
-    "fastapi >= 0.68"
+    "fastapi >= 0.68",
+    "pandas >= 1.0.0",
+    "scikit-learn >= 0.24"
 ]
 
 [project.urls]
